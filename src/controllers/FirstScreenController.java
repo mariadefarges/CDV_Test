@@ -45,7 +45,8 @@ public class FirstScreenController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/register.fxml"));
         root = loader.load();
-        //RegisterController registerController = loader.getController();
+        RegisterController registerController = loader.getController();
+        registerController.setButtons();
         scene = new Scene(root);
         stage = new Stage();
         stage.setScene(scene);

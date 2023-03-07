@@ -18,6 +18,10 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
+
 import javafx.stage.Stage;
 
 /**
@@ -51,8 +55,22 @@ public class RegisterController {
     @FXML
     Button returnButton;
 
+    @FXML
+    RadioButton maleButton;
+
+    @FXML
+    RadioButton femaleButton;
+    
+    ToggleGroup genderGroup;
+
     public static void setJDBCdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
         RegisterController.jdbcdoctorManager = jdbcdoctorManager;
+    }
+    
+    public void setButtons(){
+        genderGroup = new ToggleGroup();
+        maleButton.setToggleGroup(genderGroup);
+        femaleButton.setToggleGroup(genderGroup);
     }
 
     @FXML
@@ -88,8 +106,16 @@ public class RegisterController {
         String name = nameText.getText();
         String surname = surnameText.getText();
         String hospital = hospitalText.getText();
+
+        //Gender buttons
         String gender = "";
-        //gender buttons
+        if (genderGroup.getSelectedToggle() == maleButton) {
+            gender = "Male";
+        }
+        if (genderGroup.getSelectedToggle() == femaleButton) {
+            gender = "Female";
+        }
+
         Doctor doctor = new Doctor(name, surname, gender, hospital, email, hash);
         jdbcdoctorManager.addDoctor(doctor);
 
