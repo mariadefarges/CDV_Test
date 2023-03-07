@@ -4,7 +4,6 @@
  */
 package controllers;
 
-
 import java.io.IOException;
 import javafx.event.ActionEvent;
 
@@ -40,7 +39,6 @@ public class FirstScreenController {
     @FXML
     Button login;
 
-    
     @FXML
     private void ChangeToRegister(ActionEvent e) throws IOException {
         manager.getConnection();
@@ -61,16 +59,16 @@ public class FirstScreenController {
     private void ChangeToLogin(ActionEvent e) throws IOException {
         manager.getConnection();
 
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxmlfiles/login.fxml"));
-        Parent root2 = loader2.load();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/login.fxml"));
+        root = loader.load();
         //LoginController logincontroller = loader.getController();
-        Stage stage2 = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        Scene scene2 = new Scene(root2);
-        stage2.setScene(scene2);
-        stage2.setResizable(true);
-        stage2.setTitle("Log In");
-        stage2.show();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.setTitle("Log In");
+        stage.show();
 
     }
-    
+
 }

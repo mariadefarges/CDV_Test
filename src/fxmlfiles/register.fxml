@@ -6,73 +6,75 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="552.0" prefWidth="381.0" 
-      xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="controllers.RegisterController">
-   <children>
-      <ImageView fitHeight="677.0" fitWidth="967.0" layoutX="-310.0" layoutY="-25.0" pickOnBounds="true" preserveRatio="true">
-         <image>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="controllers.RegisterController">
+    <children>
+        <ImageView fitHeight="798.0" fitWidth="1060.0" layoutX="-61.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true"> 
+            <image>
             <Image url="@../images/background2.jpg" />
-         </image>
-      </ImageView>
-      <Label layoutX="114.0" layoutY="11.0" prefHeight="43.0" prefWidth="145.0" text="REGISTER" textAlignment="CENTER" textFill="#fff6f6">
+            </image>
+        </ImageView>
+
+        <Label layoutX="392.0" layoutY="14.0" prefHeight="106.0" prefWidth="196.0" text="REGISTER" textFill="WHITE">
+            <font>
+                <Font name="Avenir Black" size="40.0" />
+            </font>
+        </Label>
+      <Label layoutX="205.0" layoutY="97.0" prefHeight="48.0" prefWidth="126.0" text="EMAIL:" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="30.0" />
+            <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="57.0" layoutY="61.0" prefHeight="30.0" prefWidth="130.0" text="EMAIL:" textAlignment="CENTER" textFill="WHITE">
+      <TextField fx:id="emailText" layoutX="201.0" layoutY="139.0" prefHeight="10.0" prefWidth="578.0" />
+      <Label layoutX="205.0" layoutY="166.0" prefHeight="48.0" prefWidth="145.0" text="PASSWORD:" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="15.0" />
+            <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="57.0" layoutY="89.0" prefHeight="5.0" prefWidth="274.0" />
-      <Label layoutX="58.0" layoutY="121.0" prefHeight="30.0" prefWidth="130.0" text="PASSWORD:" textAlignment="CENTER" textFill="WHITE">
+      <TextField fx:id="passwordText" layoutX="203.0" layoutY="207.0" prefHeight="27.0" prefWidth="578.0" />
+      <Label layoutX="204.0" layoutY="234.0" prefHeight="48.0" prefWidth="206.0" text="REPEAT PASSWORD:" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="15.0" />
+            <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="58.0" layoutY="153.0" prefHeight="20.0" prefWidth="274.0" />
-      <Label layoutX="56.0" layoutY="188.0" prefHeight="30.0" prefWidth="155.0" text="REPEAT PASSWORD:" textAlignment="CENTER" textFill="WHITE">
+      <TextField fx:id="repeatPasswordText" layoutX="203.0" layoutY="276.0" prefHeight="27.0" prefWidth="578.0" />
+      <Label layoutX="207.0" layoutY="303.0" prefHeight="48.0" prefWidth="206.0" text="NAME:" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="15.0" />
+            <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="58.0" layoutY="224.0" prefHeight="20.0" prefWidth="274.0" />
-      <Button layoutX="169.0" layoutY="511.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="39.0" text="OK" />
-      <Label layoutX="56.0" layoutY="259.0" prefHeight="30.0" prefWidth="155.0" text="NAME:" textAlignment="CENTER" textFill="WHITE">
+      <TextField fx:id="nameText" layoutX="203.0" layoutY="344.0" prefHeight="27.0" prefWidth="578.0" />
+      <TextField fx:id="surnameText" layoutX="201.0" layoutY="412.0" prefHeight="27.0" prefWidth="578.0" />
+      <Label layoutX="207.0" layoutY="371.0" prefHeight="48.0" prefWidth="206.0" text="SURNAME:" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="15.0" />
+            <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="324.0" prefHeight="30.0" prefWidth="155.0" text="SURNAME:" textAlignment="CENTER" textFill="WHITE">
+      <Label layoutX="204.0" layoutY="453.0" prefHeight="48.0" prefWidth="206.0" text="GENDER:" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="15.0" />
+            <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <TextField layoutX="58.0" layoutY="289.0" prefHeight="20.0" prefWidth="274.0" />
-      <TextField layoutX="58.0" layoutY="354.0" prefHeight="20.0" prefWidth="274.0" />
-      <Label layoutX="56.0" layoutY="392.0" prefHeight="30.0" prefWidth="155.0" text="GENDER:" textAlignment="CENTER" textFill="WHITE">
+      <TextField fx:id="hospitalText" layoutX="201.0" layoutY="538.0" prefHeight="27.0" prefWidth="578.0" />
+      <Label layoutX="204.0" layoutY="501.0" prefHeight="48.0" prefWidth="206.0" text="HOSPITAL:" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="15.0" />
+            <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="56.0" layoutY="437.0" prefHeight="30.0" prefWidth="155.0" text="HOSPITAL:" textAlignment="CENTER" textFill="WHITE">
+      <RadioButton layoutX="331.0" layoutY="466.0" mnemonicParsing="false" text="MALE" textFill="WHITE">
          <font>
-            <Font name="Avenir Black" size="15.0" />
-         </font>
-      </Label>
-      <TextField layoutX="57.0" layoutY="467.0" prefHeight="20.0" prefWidth="274.0" />
-      <RadioButton layoutX="142.0" layoutY="398.0" mnemonicParsing="false" text="MALE" textFill="WHITE">
-         <font>
-            <Font name="Arial Black" size="13.0" />
+            <Font name="Arial Black" size="15.0" />
          </font>
       </RadioButton>
-      <RadioButton layoutX="243.0" layoutY="398.0" mnemonicParsing="false" text="FEMALE" textFill="WHITE">
+      <RadioButton layoutX="442.0" layoutY="466.0" mnemonicParsing="false" text="FEMALE" textFill="WHITE">
          <font>
-            <Font name="Arial Black" size="13.0" />
+            <Font name="Arial Black" size="15.0" />
          </font>
       </RadioButton>
-   </children>
-</Pane>
+      <Button fx:id="returnButton" layoutX="458.0" layoutY="592.0" mnemonicParsing="false" onAction="#returnToFirstScreen" text="Return" />
+      <Button fx:id="okButton" layoutX="816.0" layoutY="538.0" mnemonicParsing="false" onAction="#checkRegister" text="OK" />
+    </children>
+</AnchorPane>

@@ -13,10 +13,10 @@ import java.util.Objects;
  * @author mariadefarges
  */
 public class Doctor implements Serializable {
-    
+
     private static final long serialVersionUID = -1L;
-    
-    private final Integer doctorId;
+
+    private Integer doctorId;
     private String name;
     private String surname;
     private String gender;
@@ -27,6 +27,15 @@ public class Doctor implements Serializable {
 
     public Doctor(Integer doctorId, String name, String surname, String gender, String hospital, String email, String password) {
         this.doctorId = doctorId;
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
+        this.hospital = hospital;
+        this.email = email;
+        this.password = password;
+    }
+
+    public Doctor(String name, String surname, String gender, String hospital, String email, String password) {
         this.name = name;
         this.surname = surname;
         this.gender = gender;
@@ -82,7 +91,6 @@ public class Doctor implements Serializable {
     public String getEmail() {
         return email;
     }
-    
 
     @Override
     public int hashCode() {
@@ -134,5 +142,5 @@ public class Doctor implements Serializable {
     public String toString() {
         return "Doctor{" + "doctorId=" + doctorId + ", name=" + name + ", surname=" + surname + ", gender=" + gender + ", hospital=" + hospital + ", email=" + email + ", password=" + password + '}';
     }
-    
+
 }
