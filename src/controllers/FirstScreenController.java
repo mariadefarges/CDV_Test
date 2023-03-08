@@ -23,11 +23,11 @@ import jdbc.JDBCPatientManager;
  */
 public class FirstScreenController {
 
-    public  JDBCManager manager = new JDBCManager();
-    public  JDBCDiseaseManager diseaseManager = new JDBCDiseaseManager(manager);
-    public  JDBCDoctorManager doctorManager = new JDBCDoctorManager(manager);
-    public  JDBCPatientManager patientManager = new JDBCPatientManager(manager);
-    public  JDBCConditionManager conditionManager = new JDBCConditionManager(manager);
+    public static JDBCManager manager = new JDBCManager();
+    public static  JDBCDiseaseManager diseaseManager = new JDBCDiseaseManager(manager);
+    public static  JDBCDoctorManager doctorManager = new JDBCDoctorManager(manager);
+    public static  JDBCPatientManager patientManager = new JDBCPatientManager(manager);
+    public static  JDBCConditionManager conditionManager = new JDBCConditionManager(manager);
 
     private Parent root;
     private Stage stage;

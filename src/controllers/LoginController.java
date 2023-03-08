@@ -25,7 +25,7 @@ import pojos.Doctor;
  */
 public class LoginController {
 
-    private JDBCDoctorManager jdbcdoctorManager;
+    private static JDBCDoctorManager jdbcdoctorManager;
 
     private Parent root;
     private Stage stage;

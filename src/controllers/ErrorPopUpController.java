@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.*;
 import jdbc.JDBCConditionManager;
 import jdbc.JDBCDiseaseManager;
@@ -24,7 +25,15 @@ import jdbc.JDBCPatientManager;
 
 public class ErrorPopUpController {
 	@FXML
-	private TextField errorDisplayText;
+	private Label errorDisplayText;
+
+    public ErrorPopUpController(Label errorDisplayText) {
+        this.errorDisplayText = errorDisplayText;
+    }
+
+   
+        
+        
 
 	public void displayErrorText(String text) {
 		errorDisplayText.setText(text);

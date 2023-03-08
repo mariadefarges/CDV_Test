@@ -31,7 +31,8 @@ import javafx.stage.Stage;
 public class RegisterController {
 
     //private static JDBCDoctorManager jdbcdoctorManager;
-    private JDBCDoctorManager jdbcdoctorManager;
+    private static JDBCDoctorManager jdbcdoctorManager;
+    private ErrorPopUp ep = new ErrorPopUp();
     
     private Parent root;
     private Stage stage;
@@ -64,8 +65,9 @@ public class RegisterController {
     
     ToggleGroup genderGroup;
 
-    public void setJDBCdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
+   public void setJDBCdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
         RegisterController.jdbcdoctorManager = jdbcdoctorManager;
+    
     }
     
     public void setButtons(){
@@ -83,10 +85,11 @@ public class RegisterController {
 
         String checkEmail = jdbcdoctorManager.checkEmail(email);
 
-
+       
         if (!checkEmail.equals("")) {
-            //System.out.println("The email introduced is already registered. \n");
-            ErrorPopUp.errorPopup(1);
+            System.out.println("The email introduced is already registered. \n");
+            ep.errorPopup(1);
+           
             return;
         }
         password = passwordText.getText();
