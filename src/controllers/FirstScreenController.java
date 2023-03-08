@@ -46,6 +46,7 @@ public class FirstScreenController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/register.fxml"));
         root = loader.load();
         RegisterController registerController = loader.getController();
+        registerController.setJDBCdoctorManager(doctorManager);
         registerController.setButtons();
         scene = new Scene(root);
         stage = new Stage();
@@ -62,7 +63,8 @@ public class FirstScreenController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/login.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
+        LoginController logincontroller = loader.getController();
+        logincontroller.setJdbcdoctorManager(doctorManager);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

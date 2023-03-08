@@ -40,7 +40,7 @@ public class LoginController {
     @FXML
     private TextField passwordText;
 
-    public static void setJdbcdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
+    public void setJdbcdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
         LoginController.jdbcdoctorManager = jdbcdoctorManager;
     }
 

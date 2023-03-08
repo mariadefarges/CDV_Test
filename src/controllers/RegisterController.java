@@ -63,7 +63,7 @@ public class RegisterController {
     
     ToggleGroup genderGroup;
 
-    public static void setJDBCdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
+    public void setJDBCdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
         RegisterController.jdbcdoctorManager = jdbcdoctorManager;
     }
     
