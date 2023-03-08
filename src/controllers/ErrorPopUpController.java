@@ -25,17 +25,21 @@ import jdbc.JDBCPatientManager;
 
 public class ErrorPopUpController {
 	@FXML
-	private Label errorDisplayText;
+	private Label errorText;
 
-    public ErrorPopUpController(Label errorDisplayText) {
-        this.errorDisplayText = errorDisplayText;
+    public ErrorPopUpController() {
+    }
+        
+    
+
+    public ErrorPopUpController(Label errorText) {
+        this.errorText = errorText;
     }
 
    
-        
-        
-
-	public void displayErrorText(String text) {
-		errorDisplayText.setText(text);
+    public void displayErrorText(String text) {
+                
+        errorText.setText(text);
+        errorText.setWrapText(true);
 	}
 }

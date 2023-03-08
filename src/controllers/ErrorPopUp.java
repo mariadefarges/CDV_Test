@@ -63,9 +63,9 @@ public class ErrorPopUp {
                 loaderError = new FXMLLoader(getClass().getResource("/fxmlfiles/errorPopUp.fxml"));
                 rootError = loaderError.load();
                 errorPopupController = loaderError.getController();
-                errorText.setText("The email already exists. Please log in or introduce a new one"); 
-                errorPopupController = new  ErrorPopUpController(errorText);
-                //errorPopupController.displayErrorText("The email already exists. Please log in or introduce a new one");
+                //errorText.setText("The email already exists. Please log in or introduce a new one"); 
+                //errorPopupController = new ErrorPopUpController(errorText);
+                errorPopupController.displayErrorText("The email already exists. \n Please log in or introduce a new one");
                 sceneError = new Scene(rootError);
                 stageError = new Stage();
 
