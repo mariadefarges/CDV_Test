@@ -30,8 +30,9 @@ import javafx.stage.Stage;
  */
 public class RegisterController {
 
-    private static JDBCDoctorManager jdbcdoctorManager;
-
+    //private static JDBCDoctorManager jdbcdoctorManager;
+    private JDBCDoctorManager jdbcdoctorManager;
+    
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -82,10 +83,12 @@ public class RegisterController {
 
         String checkEmail = jdbcdoctorManager.checkEmail(email);
 
-        /*if (!checkEmail.equals("")) {
-            System.out.println("The email introduced is already registered. \n");
+
+        if (!checkEmail.equals("")) {
+            //System.out.println("The email introduced is already registered. \n");
+            ErrorPopUp.errorPopup(1);
             return;
-        }*/
+        }
         password = passwordText.getText();
         repeatpw = repeatPasswordText.getText();
 

@@ -4,7 +4,7 @@
  */
 package controllers;
 
-import static controllers.FirstScreenController.manager;
+//import  controllers.FirstScreenController.manager;
 import java.io.IOException;
 import java.sql.SQLException;
 import javafx.event.ActionEvent;
@@ -25,7 +25,7 @@ import pojos.Doctor;
  */
 public class LoginController {
 
-    private static JDBCDoctorManager jdbcdoctorManager;
+    private JDBCDoctorManager jdbcdoctorManager;
 
     private Parent root;
     private Stage stage;
