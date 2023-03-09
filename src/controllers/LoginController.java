@@ -52,7 +52,6 @@ public class LoginController {
         String email = emailText.getText();
         String password = passwordText.getText();
         Doctor doctor = jdbcdoctorManager.checkPassword(email, password);
-        System.out.println(doctor);
 
         if (doctor == null){
             ep.errorPopup(2);

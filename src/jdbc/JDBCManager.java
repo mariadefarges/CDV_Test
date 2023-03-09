@@ -18,12 +18,12 @@ public class JDBCManager {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:./db/CardiovascularDiagnosis.db");
             c.createStatement().execute("PRAGMA foreign_keys=ON");
-            System.out.println("Database connection opened.");
+            //System.out.println("Database connection opened.");
             try {
                 this.createTables();
             } catch (SQLException e) {
 
-                System.out.println("The tables have been already created");
+               // System.out.println("The tables have been already created");
             }
 
         } catch (SQLException e) {
