@@ -82,11 +82,12 @@ public class JDBCDoctorManager implements DoctorManager {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
             byte[] hash = md.digest();
+            String hash2 = new String(hash, 0, hash.length);
             Doctor d = null;
             String sql = "SELECT * FROM doctor WHERE email = ? AND password = ?";
             PreparedStatement prep = manager.getConnection().prepareStatement(sql);
             prep.setString(1, email);
-            prep.setBytes(2, hash);
+            prep.setString(2, hash2);
             ResultSet rs = prep.executeQuery();
             if (rs.next()) {
                 int doctorId = rs.getInt("doctorId");
@@ -94,7 +95,9 @@ public class JDBCDoctorManager implements DoctorManager {
                 String surname = rs.getString("surname");
                 String gender = rs.getString("gender");
                 String hospital = rs.getString("hospital");
-                d = new Doctor(doctorId, name, surname, gender, hospital, email, password);
+                String email2 = rs.getString("email");
+                String password2 = rs.getString("password");
+                d = new Doctor(doctorId, name, surname, gender, hospital, email2, password2);
                 d.setPatients(patientmanager.getPatientsOfDoctor(doctorId));
             }
             prep.close();
