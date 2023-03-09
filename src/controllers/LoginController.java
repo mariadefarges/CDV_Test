@@ -30,6 +30,8 @@ public class LoginController {
     private Parent root;
     private Stage stage;
     private Scene scene;
+    
+    private ErrorPopUp ep = new ErrorPopUp();
 
     @FXML
     Button returnButton;
@@ -52,10 +54,10 @@ public class LoginController {
         Doctor doctor = jdbcdoctorManager.checkPassword(email, password);
         System.out.println(doctor);
 
-        /*if (doctor == null){
-            ERROR POP UP
+        if (doctor == null){
+            ep.errorPopup(2);
         }
-         */
+         
         //CHANGE TO MAIN SCREEN
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
