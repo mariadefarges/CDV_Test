@@ -95,11 +95,11 @@ public class RegisterController {
         password = passwordText.getText();
         repeatpw = repeatPasswordText.getText();
 
-        /*if (!password.equals(repeatpw)){
+        if (!password.equals(repeatpw)){
             System.out.println("The password does not coincide");
-            errorPopup.errorPopup(17);
+            ep.errorPopup(3);
             return;
-        }*/
+        }
  /*if(password.equals("") || repeatpassword.equals("")){
             errorPopup.errorPopup(2);
             return;

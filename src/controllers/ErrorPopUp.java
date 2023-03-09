@@ -65,7 +65,7 @@ public class ErrorPopUp {
                 errorPopupController = loaderError.getController();
                 //errorText.setText("The email already exists. Please log in or introduce a new one"); 
                 //errorPopupController = new ErrorPopUpController(errorText);
-                errorPopupController.displayErrorText("The email already exists. \n Please log in or introduce a new one");
+                errorPopupController.displayErrorText("The email already exists.\nPlease log in or introduce a new one");
                 sceneError = new Scene(rootError);
                 stageError = new Stage();
 
@@ -83,7 +83,7 @@ public class ErrorPopUp {
                 errorPopupController = loaderError.getController();
                 //errorText.setText("The email already exists. Please log in or introduce a new one"); 
                 //errorPopupController = new ErrorPopUpController(errorText);
-                errorPopupController.displayErrorText("The email or password is incorrect. \n Please try again");
+                errorPopupController.displayErrorText("The email or password is incorrect.\nPlease try again");
                 sceneError = new Scene(rootError);
                 stageError = new Stage();
 
@@ -95,6 +95,25 @@ public class ErrorPopUp {
                 stageError.setResizable(false);
                 stageError.show();
                 break;
+            case 3:
+                loaderError = new FXMLLoader(getClass().getResource("/fxmlfiles/errorPopUp.fxml"));
+                rootError = loaderError.load();
+                errorPopupController = loaderError.getController();
+                //errorText.setText("The email already exists. Please log in or introduce a new one"); 
+                //errorPopupController = new ErrorPopUpController(errorText);
+                errorPopupController.displayErrorText("The passwords do not match.\nPlease repeat your password");
+                sceneError = new Scene(rootError);
+                stageError = new Stage();
+
+                //icon = new Image("CVD_Test/images/errorIcon.png");
+                //stageError.getIcons().add(icon);
+
+                stageError.setScene(sceneError);
+                stageError.setTitle("Error: Incorrect email or password");
+                stageError.setResizable(false);
+                stageError.show();
+                break;
+                
 
         }
     }
