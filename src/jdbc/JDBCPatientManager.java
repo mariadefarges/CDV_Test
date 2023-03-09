@@ -4,9 +4,9 @@
  */
 package jdbc;
 import ifaces.*;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import pojos.Patient;
 /**
  *
@@ -21,9 +21,10 @@ public class JDBCPatientManager implements PatientManager{
     }
     
     
+    
     @Override
-    public void addPatient(Patient p) throws SQLException {
-        String sql = "INSERT INTO patient (name, surname, gender, birthDate,weight, bloodType, background) VALUES (?,?,?,?,?,?,?)";
+    public void addPatient(Patient p, int doctorId) throws SQLException {
+        String sql = "INSERT INTO patient (name, surname, gender, birthDate,weight, bloodType, background, doctorId) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
         prep.setString(1, p.getName());
         prep.setString(2, p.getSurname());
@@ -59,4 +60,28 @@ public class JDBCPatientManager implements PatientManager{
         rs.close();
         return p;
     }
+    
+    	@Override
+	public List<Patient> getPatientsOfDoctor(int doctorId) throws SQLException {
+		Patient p = null;
+		String sql = "SELECT * FROM patient WHERE doctorId = ?";
+		PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+		prep.setInt(1, doctorId);
+		ResultSet rs = prep.executeQuery();
+		List <Patient> patients = new ArrayList<Patient>();
+		while(rs.next()){
+			int id = rs.getInt("patientId");
+			String name = rs.getString("name");
+			String surname = rs.getString("surname");
+			String gender = rs.getString("gender");
+			Date birthDate = rs.getDate("birthDate");
+			float weight = rs.getFloat("weight");
+			String bloodType = rs.getString("bloodType");
+			String background = rs.getString("background");
+			p= new Patient(id, name, surname, gender, birthDate, weight, bloodType, background);
+			patients.add(p);
+		}
+		rs.close();	
+		return patients;
+	}
 }

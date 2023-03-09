@@ -51,11 +51,11 @@ public class JDBCManager {
         String sql = "CREATE TABLE doctor "
                 + "(doctorId INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "	name TEXT NOT NULL,"
-                + " surname TEXT NOT NULL,"
+                + "     surname TEXT NOT NULL,"
                 + "	gender TEXT NOT NULL,"
-                + " hospital TEXT NOT NULL,"
+                + "     hospital TEXT NOT NULL,"
                 + "	email TEXT NOT NULL,"
-                + " password TEXT NOT NULL )";
+                + "     password TEXT NOT NULL )";
         stmt.executeUpdate(sql);
         sql = "CREATE TABLE condition "
                 + "(conditionId INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -90,15 +90,15 @@ public class JDBCManager {
         sql = "CREATE TABLE patient "
                 + "(patientId INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "	name TEXT NOT NULL,"
-                + " surname TEXT NOT NULL,"
+                + "     surname TEXT NOT NULL,"
                 + "	gender TEXT NOT NULL,"
                 + "	birthDate DATE NOT NULL,"
-                + " weight TEXT NOT NULL,"
+                + "     weight TEXT NOT NULL,"
                 + "	bloodType TEXT NOT NULL,"
-                + " background TEXT NOT NULL,"
-                + "	conditionId INTEGER REFERENCES condition(conditionId) ON DELETE CASCADE,"
-                + "	diseaseId INTEGER REFERENCES disease(diseaseId) ON DELETE CASCADE,"
-                + "	doctorId INTEGER REFERENCES doctor(doctorId) ON DELETE CASCADE )";
+                + "     background TEXT NOT NULL,"
+                + "	doctorId INTEGER REFERENCES condition(conditionId) ON DELETE CASCADE,"
+                + "	conditionId INTEGER REFERENCES disease(diseaseId) ON DELETE CASCADE,"
+                + "	diseaseId INTEGER REFERENCES doctor(doctorId) ON DELETE CASCADE )";
                 
         stmt.executeUpdate(sql);
         System.out.println("Tables created");

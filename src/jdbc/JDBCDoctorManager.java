@@ -3,23 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package jdbc;
+
 import ifaces.*;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import pojos.*;
+
 /**
  *
  * @author carme
  */
 public class JDBCDoctorManager implements DoctorManager {
-    
-    private final JDBCManager manager;
 
-    public JDBCDoctorManager(JDBCManager m) {
+    private final JDBCManager manager;
+    private final JDBCPatientManager patientmanager;
+
+    public JDBCDoctorManager(JDBCManager m, JDBCPatientManager patientmanager) {
         this.manager = m;
+        this.patientmanager = patientmanager;
     }
-    
+
     @Override
     public void addDoctor(Doctor d) throws SQLException {
         String sql = "INSERT INTO doctor (name, surname, gender, hospital,email, password) VALUES (?,?,?,?,?,?)";
@@ -33,7 +37,6 @@ public class JDBCDoctorManager implements DoctorManager {
         prep.executeUpdate();
         prep.close();
     }
-
 
     @Override
     public Doctor searchDoctorById(int doctorId) throws SQLException {
@@ -50,13 +53,13 @@ public class JDBCDoctorManager implements DoctorManager {
             String email = rs.getString("email");
             String password = rs.getString("password");
 
-             d = new Doctor(doctorId, name, surname, gender, hospital,email, password);
+            d = new Doctor(doctorId, name, surname, gender, hospital, email, password);
         }
         prep.close();
         rs.close();
         return d;
     }
-    
+
     @Override
     public String checkEmail(String email) throws SQLException {
         String checkemail = "";
@@ -86,10 +89,13 @@ public class JDBCDoctorManager implements DoctorManager {
             prep.setBytes(2, hash);
             ResultSet rs = prep.executeQuery();
             if (rs.next()) {
-                d = new Doctor(rs.getInt("doctorId"), rs.getString("name"),
-                        rs.getString("surname"), rs.getString("gender"),
-                        rs.getString("hospital"), rs.getString("email"), 
-                        rs.getString("password"));
+                int doctorId = rs.getInt("doctorId");
+                String name = rs.getString("name");
+                String surname = rs.getString("surname");
+                String gender = rs.getString("gender");
+                String hospital = rs.getString("hospital");
+                d = new Doctor(doctorId, name, surname, gender, hospital, email, password);
+                d.setPatients(patientmanager.getPatientsOfDoctor(doctorId));
             }
             prep.close();
             rs.close();

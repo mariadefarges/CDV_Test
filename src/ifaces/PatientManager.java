@@ -4,6 +4,7 @@
  */
 package ifaces;
 import java.sql.*;
+import java.util.List;
 import pojos.Patient;
 /**
  *
@@ -11,7 +12,8 @@ import pojos.Patient;
  */
 public interface PatientManager {
     
-    public void addPatient(Patient p) throws SQLException;
+    public void addPatient(Patient p, int doctorId) throws SQLException;
     public Patient searchPatientById(int patientId) throws SQLException;
+    public List<Patient> getPatientsOfDoctor(int doctorId) throws SQLException;
     
 }

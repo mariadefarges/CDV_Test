@@ -92,6 +92,15 @@ public class Doctor implements Serializable {
         return email;
     }
 
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
+    }
+    
+
     @Override
     public int hashCode() {
         int hash = 5;

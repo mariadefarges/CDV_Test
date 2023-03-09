@@ -24,9 +24,9 @@ import jdbc.JDBCPatientManager;
 public class FirstScreenController {
 
     public static JDBCManager manager = new JDBCManager();
-    public static  JDBCDiseaseManager diseaseManager = new JDBCDiseaseManager(manager);
-    public static  JDBCDoctorManager doctorManager = new JDBCDoctorManager(manager);
+    public static  JDBCDiseaseManager diseaseManager = new JDBCDiseaseManager(manager);  
     public static  JDBCPatientManager patientManager = new JDBCPatientManager(manager);
+    public static  JDBCDoctorManager doctorManager = new JDBCDoctorManager(manager, patientManager);
     public static  JDBCConditionManager conditionManager = new JDBCConditionManager(manager);
 
     private Parent root;
