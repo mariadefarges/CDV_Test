@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import jdbc.JDBCDoctorManager;
 import pojos.Doctor;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -20,8 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.HBox;
-
 import javafx.stage.Stage;
 
 /**
@@ -32,8 +32,9 @@ public class RegisterController {
 
     //private static JDBCDoctorManager jdbcdoctorManager;
     private static JDBCDoctorManager jdbcdoctorManager;
-    private ErrorPopUp ep = new ErrorPopUp();
-    
+    //private ErrorPopUp ep = new ErrorPopUp();
+    private ErrorPopUpController ep = new ErrorPopUpController();
+    private CorrectPopUpController cp = new CorrectPopUpController();
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -79,7 +80,9 @@ public class RegisterController {
     @FXML
     private void checkRegister(ActionEvent e) throws IOException, NoSuchAlgorithmException, SQLException {
 
-        String email, password, repeatpw;
+        String email="";
+        String password="";
+        String repeatpw= "";
 
         email = emailText.getText();
 
@@ -92,6 +95,10 @@ public class RegisterController {
            
             return;
         }
+        if(email.equals("")){
+            ep.errorPopup(5);
+            return;
+        }
         password = passwordText.getText();
         repeatpw = repeatPasswordText.getText();
 
@@ -100,18 +107,33 @@ public class RegisterController {
             ep.errorPopup(3);
             return;
         }
- /*if(password.equals("") || repeatpassword.equals("")){
-            errorPopup.errorPopup(2);
+        if(password.equals("") || repeatpw.equals("")){
+            ep.errorPopup(6);
             return;
-        }*/
+        }
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes());
         byte[] hash2 = md.digest();
         String hash = new String(hash2, 0, hash2.length);
 
-        String name = nameText.getText();
-        String surname = surnameText.getText();
-        String hospital = hospitalText.getText();
+        String name = "";
+        name = nameText.getText();
+         if(name.equals("")){
+            ep.errorPopup(7);
+            return;
+        }
+        String surname = "";
+        surname= surnameText.getText();
+         if(surname.equals("")){
+            ep.errorPopup(8);
+            return;
+        }
+        String hospital = "";
+        hospital = hospitalText.getText();
+         if(hospital.equals("")){
+            ep.errorPopup(9);
+            return;
+        }
 
         //Gender buttons
         String gender = "";
@@ -121,11 +143,18 @@ public class RegisterController {
         if (genderGroup.getSelectedToggle() == femaleButton) {
             gender = "Female";
         }
+         if (gender.equals("")){
+            System.out.println("Any gender selected");
+            ep.errorPopup(4);
+            return;
+        }
 
         Doctor doctor = new Doctor(name, surname, gender, hospital, email, hash);
         jdbcdoctorManager.addDoctor(doctor);
 
         // successPopup.successPopup(12); USER SAVED SUCCESSFULLY
+        cp.correctPopup(0);
+      
         //RETURN TO FIRST SCREEN
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/firstscreen.fxml"));
         root = loader.load();

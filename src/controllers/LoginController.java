@@ -33,7 +33,7 @@ public class LoginController {
     private Stage stage;
     private Scene scene;
     
-    private ErrorPopUp ep = new ErrorPopUp();
+    private ErrorPopUpController ep = new ErrorPopUpController();
 
     @FXML
     Button returnButton;

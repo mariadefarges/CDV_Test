@@ -33,6 +33,8 @@ public class AddPatientController {
 
     static JDBCDoctorManager jdbcdoctorManager;
     static JDBCPatientManager jdbcpatientManager;
+    private ErrorPopUpController ep = new ErrorPopUpController();
+    private CorrectPopUpController cp = new CorrectPopUpController();
 
     private Parent root;
     private Stage stage;
@@ -114,8 +116,18 @@ public class AddPatientController {
     @FXML
     private void addpatient(ActionEvent e) throws IOException, SQLException {
 
-        String name = nameText.getText();
-        String surname = surnameText.getText();
+        String name = "";
+        name = nameText.getText();
+        if(name.equals("")){
+            ep.errorPopup(10);
+            return;
+        }
+        String surname = "";
+        surname = surnameText.getText();
+        if(surname.equals("")){
+            ep.errorPopup(11);
+            return;
+        }
         
         //Gender buttons
         String gender = "";
@@ -125,23 +137,38 @@ public class AddPatientController {
         if (genderGroup.getSelectedToggle() == femaleButton) {
             gender = "Female";
         }
-        
+        if (gender.equals("")){
+            System.out.println("Any gender selected");
+            ep.errorPopup(4);
+            return;
+        }
         //Date Picker
         LocalDate date = dob.getValue();
         Date birthdate = Date.valueOf(date);
         
 
-        String weighttext = weightText.getText();
+        String weighttext = "";
+        weighttext = weightText.getText();
+        if(weighttext.equals("")){
+            ep.errorPopup(12);
+            return;
+        }
         Float weight = Float.parseFloat(weighttext);
         
         String bloodtype = group + " " + rh;
         
-        String background = backgroundText.getText();
+        String background ="";
+        background = backgroundText.getText();
+        if(background.equals("")){
+            ep.errorPopup(13);
+            return;
+        }
         
         Patient patient = new Patient(name,surname, gender, birthdate, weight, bloodtype, background);
         jdbcpatientManager.addPatient(patient, doctor.getDoctorId());
 
         //SUCESS POP UP
+        cp.correctPopup(1);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
         MainScreenController mainscreencontroller = loader.getController();
