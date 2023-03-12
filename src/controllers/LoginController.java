@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jdbc.JDBCDoctorManager;
+import jdbc.JDBCPatientManager;
 import pojos.Doctor;
 
 /**
@@ -25,7 +26,8 @@ import pojos.Doctor;
  */
 public class LoginController {
 
-    static JDBCDoctorManager jdbcdoctorManager;
+    private static JDBCDoctorManager jdbcdoctorManager;
+    private static JDBCPatientManager jdbcpatientManager;
 
     private Parent root;
     private Stage stage;
@@ -42,8 +44,9 @@ public class LoginController {
     @FXML
     private TextField passwordText;
 
-    public void setJdbcdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
-        LoginController.jdbcdoctorManager = jdbcdoctorManager;
+    public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
+        this.jdbcdoctorManager = jdbcdoctorManager;
+        this.jdbcpatientManager = jdbcpatientManager;
     }
 
     @FXML
@@ -61,7 +64,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
         MainScreenController maincontroller = loader.getController();
-        maincontroller.setJdbcdoctorManager(jdbcdoctorManager);
+        maincontroller.setJDBC(jdbcdoctorManager, jdbcpatientManager);
         maincontroller.setDoctor(doctor);
         maincontroller.setWelcomeText("Welcome Mr/Mrs " + doctor.getName() + " " + doctor.getSurname());
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();

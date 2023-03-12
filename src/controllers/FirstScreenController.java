@@ -64,7 +64,7 @@ public class FirstScreenController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/login.fxml"));
         root = loader.load();
         LoginController logincontroller = loader.getController();
-        logincontroller.setJdbcdoctorManager(doctorManager);
+        logincontroller.setJDBC(doctorManager, patientManager);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

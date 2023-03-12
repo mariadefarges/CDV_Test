@@ -18,8 +18,7 @@ public class JDBCPatientManager implements PatientManager{
 
     public JDBCPatientManager(JDBCManager m) {
         this.manager = m;
-    }
-    
+    } 
     
     
     @Override
@@ -33,6 +32,7 @@ public class JDBCPatientManager implements PatientManager{
         prep.setFloat(5, p.getWeight());
         prep.setString(6, p.getBloodType());
         prep.setString(7, p.getBackground());
+        prep.setInt(8,doctorId);
         prep.executeUpdate();
         prep.close();
     }

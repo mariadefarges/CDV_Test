@@ -43,6 +43,16 @@ public class Patient implements Serializable{
         this.background = background;
     }
     
+        public Patient(String name, String surname, String gender, Date birthDate, Float weight, String bloodType, String background) {
+        this.name = name;
+        this.surname = surname;
+        this.gender = gender;
+        this.birthDate = birthDate;
+        this.weight = weight;
+        this.bloodType = bloodType;
+        this.background = background;
+    }
+    
     
     public Patient(boolean chestPain, boolean sweating, boolean nausea, boolean legsPain, 
             boolean skinChanges, boolean decreasedPulse, boolean swellingLegs, 

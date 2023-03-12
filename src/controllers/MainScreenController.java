@@ -13,8 +13,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jdbc.JDBCDoctorManager;
+import jdbc.JDBCPatientManager;
 import pojos.Doctor;
 
 /**
@@ -24,6 +26,7 @@ import pojos.Doctor;
 public class MainScreenController {
     
     private static JDBCDoctorManager jdbcdoctorManager;
+    private static JDBCPatientManager jdbcpatientManager;
 
     private Parent root;
     private Stage stage;
@@ -32,19 +35,15 @@ public class MainScreenController {
     private Doctor doctor;
     
     @FXML
-    Button returnButton;
-    
-    @FXML
-    Button addButton;
-    
-    @FXML
-    Button existingButton;
-    
+    Button returnButton, addButton, listButton;
+
     @FXML
     Label welcomeText;
+
     
-    public void setJdbcdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
-        LoginController.jdbcdoctorManager = jdbcdoctorManager;
+    public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
+        this.jdbcdoctorManager = jdbcdoctorManager;
+        this.jdbcpatientManager = jdbcpatientManager;
     }
 
     public void setDoctor(Doctor doctor) {
@@ -52,7 +51,7 @@ public class MainScreenController {
     }
 
     public void setWelcomeText(String welcomeText) {
-        this.welcomeText.setText(welcomeText);
+        this.welcomeText.setText("Welcome Mr/Mrs " + doctor.getName() + " " + doctor.getSurname());
     }
     
     
@@ -60,7 +59,10 @@ public class MainScreenController {
     private void ChangeToAddPatient(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/addpatientscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
+        AddPatientController addpatientcontroller = loader.getController();
+        addpatientcontroller.setJDBC(jdbcdoctorManager, jdbcpatientManager);
+        addpatientcontroller.setButtons();
+        addpatientcontroller.setDoctor(doctor);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -71,10 +73,13 @@ public class MainScreenController {
     
 
     @FXML
-    private void ChangeToExistingPatient(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/existingpatientscreen.fxml"));
+    private void ChangeToListPatients(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/listpatientscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
+        ListofPatientsController listofpatients = loader.getController();
+        listofpatients.setJDBC(jdbcdoctorManager, jdbcpatientManager);
+        listofpatients.setDoctor(doctor);
+        listofpatients.setTable();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -87,7 +92,6 @@ public class MainScreenController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/firstscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

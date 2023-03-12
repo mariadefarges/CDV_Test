@@ -17,9 +17,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import jdbc.JDBCDoctorManager;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import jdbc.JDBCPatientManager;
+import pojos.Doctor;
+import pojos.Patient;
 
 /**
  *
@@ -28,6 +32,7 @@ import javafx.scene.control.ToggleGroup;
 public class AddPatientController {
 
     static JDBCDoctorManager jdbcdoctorManager;
+    static JDBCPatientManager jdbcpatientManager;
 
     private Parent root;
     private Stage stage;
@@ -88,18 +93,29 @@ public class AddPatientController {
     RadioButton maleButton, femaleButton;
 
     ToggleGroup genderGroup;
+    
+    Doctor doctor;
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
 
     public void setButtons() {
-        genderGroup = new ToggleGroup();
-        maleButton.setToggleGroup(genderGroup);
-        femaleButton.setToggleGroup(genderGroup);
+        this.genderGroup = new ToggleGroup();
+        maleButton.setToggleGroup(this.genderGroup);
+        femaleButton.setToggleGroup(this.genderGroup);
+    }
+    
+        public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
+        this.jdbcdoctorManager = jdbcdoctorManager;
+        this.jdbcpatientManager = jdbcpatientManager;
     }
 
     @FXML
-    private void addpatient(ActionEvent e) throws IOException {
+    private void addpatient(ActionEvent e) throws IOException, SQLException {
 
         String name = nameText.getText();
-        String surmame = surnameText.getText();
+        String surname = surnameText.getText();
         
         //Gender buttons
         String gender = "";
@@ -115,26 +131,34 @@ public class AddPatientController {
         Date birthdate = Date.valueOf(date);
         
 
-        String weight = weightText.getText();
+        String weighttext = weightText.getText();
+        Float weight = Float.parseFloat(weighttext);
+        
+        String bloodtype = group + " " + rh;
+        
         String background = backgroundText.getText();
+        
+        Patient patient = new Patient(name,surname, gender, birthdate, weight, bloodtype, background);
+        jdbcpatientManager.addPatient(patient, doctor.getDoctorId());
 
         //SUCESS POP UP
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
+        MainScreenController mainscreencontroller = loader.getController();
+        mainscreencontroller.setDoctor(doctor);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
 
     @FXML
     private void returnToMainScreen(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
+        MainScreenController mainscreencontroller = loader.getController();
+        mainscreencontroller.setDoctor(doctor);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

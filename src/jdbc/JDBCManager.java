@@ -96,9 +96,9 @@ public class JDBCManager {
                 + "     weight TEXT NOT NULL,"
                 + "	bloodType TEXT NOT NULL,"
                 + "     background TEXT NOT NULL,"
-                + "	doctorId INTEGER REFERENCES condition(conditionId) ON DELETE CASCADE,"
-                + "	conditionId INTEGER REFERENCES disease(diseaseId) ON DELETE CASCADE,"
-                + "	diseaseId INTEGER REFERENCES doctor(doctorId) ON DELETE CASCADE )";
+                + "	doctorId INTEGER REFERENCES doctor(doctorId) ON DELETE CASCADE,"
+                + "	conditionId INTEGER REFERENCES condition(conditionId) ON DELETE CASCADE,"
+                + "	diseaseId INTEGER REFERENCES disease(diseaseId) ON DELETE CASCADE )";
                 
         stmt.executeUpdate(sql);
         System.out.println("Tables created");

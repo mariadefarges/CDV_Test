@@ -129,7 +129,6 @@ public class RegisterController {
         //RETURN TO FIRST SCREEN
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/firstscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -142,7 +141,6 @@ public class RegisterController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/firstscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
