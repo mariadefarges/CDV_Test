@@ -4,7 +4,6 @@
  */
 package controllers;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import jdbc.JDBCDoctorManager;
 import jdbc.JDBCPatientManager;
@@ -85,7 +85,7 @@ public class ListofPatientsController {
     }
 
     @FXML
-    private void selectedPatient(MouseEvent Mevent) throws IOException {
+	private void selectedPatient(MouseEvent Mevent) throws IOException {
         Patient patient = ResultsTableView.getSelectionModel().getSelectedItem();
         if (patient == null) {
             //Error POP UP
@@ -93,7 +93,10 @@ public class ListofPatientsController {
         } else {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/patientinfoscreen.fxml"));
             root = loader.load();
-            //DiseaseViewController drs = loader.getController();
+            PatientInfoController patientcontroller = loader.getController();
+            patientcontroller.setJDBC(jdbcdoctorManager, jdbcpatientManager);
+            patientcontroller.setDoctor(doctor);
+            patientcontroller.setInfo(patient);
             //drs.DiseaseView(disease);
             stage = (Stage) ((Node) Mevent.getSource()).getScene().getWindow();
             scene = new Scene(root);

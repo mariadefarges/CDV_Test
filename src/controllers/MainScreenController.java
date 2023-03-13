@@ -24,23 +24,22 @@ import pojos.Doctor;
  * @author mariadefarges
  */
 public class MainScreenController {
-    
+
     private static JDBCDoctorManager jdbcdoctorManager;
     private static JDBCPatientManager jdbcpatientManager;
 
     private Parent root;
     private Stage stage;
     private Scene scene;
-    
+
     private Doctor doctor;
-    
+
     @FXML
-    Button returnButton, addButton, listButton;
+    Button returnButton, addButton, listButton, profileButton;
 
     @FXML
     Label welcomeText;
 
-    
     public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
         this.jdbcdoctorManager = jdbcdoctorManager;
         this.jdbcpatientManager = jdbcpatientManager;
@@ -53,8 +52,7 @@ public class MainScreenController {
     public void setWelcomeText(String welcomeText) {
         this.welcomeText.setText("Welcome Mr/Mrs " + doctor.getName() + " " + doctor.getSurname());
     }
-    
-    
+
     @FXML
     private void ChangeToAddPatient(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/addpatientscreen.fxml"));
@@ -68,9 +66,24 @@ public class MainScreenController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-        
+
     }
-    
+
+    @FXML
+    private void ChangeToProfile(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/doctorinfoscreen.fxml"));
+        root = loader.load();
+        DoctorInfoController doctorinfocontroller = loader.getController();
+        doctorinfocontroller.setJDBC(jdbcdoctorManager);
+        doctorinfocontroller.setDoctor(doctor);
+        doctorinfocontroller.setInfo();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.show();
+
+    }
 
     @FXML
     private void ChangeToListPatients(ActionEvent e) throws IOException {
@@ -86,7 +99,7 @@ public class MainScreenController {
         stage.setResizable(true);
         stage.show();
     }
-    
+
     @FXML
     private void returnToFirstScreen(ActionEvent e) throws IOException {
 
@@ -99,7 +112,5 @@ public class MainScreenController {
         stage.show();
 
     }
-    
-    
-    
+
 }

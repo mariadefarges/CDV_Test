@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PatientInfoController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+fx:controller="controllers.DoctorInfoController">
     <children>
         <ImageView fitHeight="655.0" fitWidth="987.0" layoutX="-9.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true"> 
             <image>
@@ -15,7 +16,7 @@
             </image>
         </ImageView>
 
-        <Label fx:id="patientText" layoutX="297.0" layoutY="45.0" prefHeight="50.0" prefWidth="277.0" text="Patient Information" textAlignment="CENTER" textFill="#da4646">
+        <Label fx:id="patientText" layoutX="381.0" layoutY="45.0" prefHeight="50.0" prefWidth="203.0" text="Doctor profile" textAlignment="CENTER" textFill="#da4646">
             <font>
                 <Font name="Avenir Black" size="30.0" />
             </font>
@@ -35,28 +36,18 @@
             <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="271.0" layoutY="297.0" prefHeight="50.0" prefWidth="111.0" text="Birth Date:" textAlignment="CENTER" textFill="#da4646">
+      <Label layoutX="271.0" layoutY="297.0" prefHeight="50.0" prefWidth="111.0" text="Hospital:" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label layoutX="271.0" layoutY="347.0" prefHeight="50.0" prefWidth="124.0" text="Weight (Kg):" textAlignment="CENTER" textFill="#da4646">
-         <font>
-            <Font name="Avenir Black" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="271.0" layoutY="397.0" prefHeight="50.0" prefWidth="124.0" text="Blood type:" textAlignment="CENTER" textFill="#da4646">
-         <font>
-            <Font name="Avenir Black" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="271.0" layoutY="447.0" prefHeight="50.0" prefWidth="124.0" text="Background:" textAlignment="CENTER" textFill="#da4646">
+      <Label layoutX="271.0" layoutY="347.0" prefHeight="50.0" prefWidth="124.0" text="Email:" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
       <Button fx:id="returnButton" layoutX="460.0" layoutY="592.0" mnemonicParsing="false" onAction="#returnToMainScreen" text="Return" />
-      <Button fx:id="editButton" layoutX="723.0" layoutY="156.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="195.0" text="EDIT INFORMATION" textFill="#da4646">
+      <Button fx:id="changepwButton" layoutX="385.0" layoutY="445.0" mnemonicParsing="false" onAction="#changePassword" prefHeight="33.0" prefWidth="195.0" text="CHANGE PASSWORD" textFill="#da4646">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font></Button>
@@ -75,35 +66,15 @@
             <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="birthdateText" layoutX="435.0" layoutY="297.0" prefHeight="50.0" prefWidth="261.0" text="birthdateText" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="hospitalText" layoutX="435.0" layoutY="297.0" prefHeight="50.0" prefWidth="261.0" text="hospitalText" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="weightText" layoutX="435.0" layoutY="347.0" prefHeight="50.0" prefWidth="302.0" text="weightText" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="emailText" layoutX="435.0" layoutY="347.0" prefHeight="50.0" prefWidth="302.0" text="emailText" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="20.0" />
          </font>
       </Label>
-      <Label fx:id="bloodtypeText" layoutX="435.0" layoutY="397.0" prefHeight="50.0" prefWidth="302.0" text="bloodtypeText" textAlignment="CENTER" textFill="#da4646">
-         <font>
-            <Font name="Avenir Black" size="20.0" />
-         </font>
-      </Label>
-      <Label fx:id="backgroundText" alignment="TOP_LEFT" layoutX="435.0" layoutY="459.0" prefHeight="93.0" prefWidth="311.0" text="backgroundText" textAlignment="CENTER" textFill="#da4646">
-         <font>
-            <Font name="Avenir Black" size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="diagnosisButton" layoutX="723.0" layoutY="219.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="195.0" text="MAKE A DIAGNOSIS" textFill="#da4646">
-         <font>
-            <Font name="Arial Black" size="15.0" />
-         </font>
-      </Button>
-      <Button layoutX="716.0" layoutY="281.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="210.0" text="PREVIOUS DIAGNOSIS" textFill="#da4646">
-         <font>
-            <Font name="Arial Black" size="15.0" />
-         </font>
-      </Button>
     </children>
 </AnchorPane>

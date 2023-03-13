@@ -17,26 +17,23 @@ import javafx.stage.Stage;
 import jdbc.JDBCDoctorManager;
 import jdbc.JDBCPatientManager;
 import pojos.Doctor;
-import pojos.Patient;
 
 /**
  *
  * @author mariadefarges
  */
-public class PatientInfoController {
-    
+public class DoctorInfoController {
+
     static JDBCDoctorManager jdbcdoctorManager;
-    static JDBCPatientManager jdbcpatientManager;
 
     private Parent root;
     private Stage stage;
     private Scene scene;
-    
+
     Doctor doctor;
-    
-    public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
+
+    public void setJDBC(JDBCDoctorManager jdbcdoctorManager) {
         this.jdbcdoctorManager = jdbcdoctorManager;
-        this.jdbcpatientManager = jdbcpatientManager;
     }
 
     public void setDoctor(Doctor doctor) {
@@ -44,22 +41,20 @@ public class PatientInfoController {
     }
 
     @FXML
-    Button returnButton, editButton, diagnosisButton;
+    Button returnButton, changepwButton;
 
     @FXML
-    Label nameText , surnameText, genderText, birthdateText, weightText, bloodtypeText, backgroundText;
+    Label nameText, surnameText, genderText, hospitalText, emailText;
     
-    public void setInfo (Patient patient){
-        nameText.setText(patient.getName());
-        surnameText.setText(patient.getSurname());
-        genderText.setText(patient.getGender());
-        birthdateText.setText(patient.getBirthDate().toString());
-        weightText.setText(patient.getWeight().toString());
-        bloodtypeText.setText(patient.getBloodType());
-        backgroundText.setText(patient.getBackground());       
+        public void setInfo (){
+        nameText.setText(this.doctor.getName());
+        surnameText.setText(this.doctor.getSurname());
+        genderText.setText(this.doctor.getGender());
+        hospitalText.setText(this.doctor.getHospital());
+        emailText.setText(this.doctor.getEmail());
+           
     }
-    
-    
+
     @FXML
     private void returnToMainScreen(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
@@ -73,4 +68,19 @@ public class PatientInfoController {
         stage.show();
 
     }
+
+    @FXML
+    private void changePassword(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/changepassword.fxml"));
+        root = loader.load();
+        MainScreenController mainscreencontroller = loader.getController();
+        mainscreencontroller.setDoctor(doctor);
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.show();
+
+    }
+
 }
