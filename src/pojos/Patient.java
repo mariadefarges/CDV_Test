@@ -41,6 +41,7 @@ public class Patient implements Serializable{
         this.weight = weight;
         this.bloodType = bloodType;
         this.background = background;
+        this.disease = new Disease();
     }
     
         public Patient(String name, String surname, String gender, Date birthDate, Float weight, String bloodType, String background) {
@@ -52,8 +53,7 @@ public class Patient implements Serializable{
         this.bloodType = bloodType;
         this.background = background;
     }
-    
-    
+   
     public Patient(boolean chestPain, boolean sweating, boolean nausea, boolean legsPain, 
             boolean skinChanges, boolean decreasedPulse, boolean swellingLegs, 
             boolean shortnessOfBreath, boolean fatigue, boolean increasedPulse, 
@@ -83,6 +83,11 @@ public class Patient implements Serializable{
     public Condition getConditions() {
         return conditions;
     }
+
+    public void setConditions(Condition conditions) {
+        this.conditions = conditions;
+    }
+    
 
     public Disease getDisease() {
         return disease;

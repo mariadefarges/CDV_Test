@@ -58,37 +58,37 @@
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="131.0" prefHeight="50.0" prefWidth="55.0" text="result1" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="resultMI" layoutX="578.0" layoutY="131.0" prefHeight="50.0" prefWidth="55.0" text="result1" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="183.0" prefHeight="50.0" prefWidth="55.0" text="result2" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="resultHF" layoutX="578.0" layoutY="183.0" prefHeight="50.0" prefWidth="55.0" text="result2" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="229.0" prefHeight="50.0" prefWidth="55.0" text="result3" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="resultPAD" layoutX="578.0" layoutY="229.0" prefHeight="50.0" prefWidth="55.0" text="result3" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="280.0" prefHeight="50.0" prefWidth="55.0" text="result4" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="resultHB" layoutX="578.0" layoutY="280.0" prefHeight="50.0" prefWidth="55.0" text="result4" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="330.0" prefHeight="50.0" prefWidth="55.0" text="result5" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="resultH" layoutX="578.0" layoutY="330.0" prefHeight="50.0" prefWidth="55.0" text="result5" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="385.0" prefHeight="50.0" prefWidth="55.0" text="result6" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="resultS" layoutX="578.0" layoutY="385.0" prefHeight="50.0" prefWidth="55.0" text="result6" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Label layoutX="578.0" layoutY="438.0" prefHeight="50.0" prefWidth="55.0" text="result7" textAlignment="CENTER" textFill="#da4646">
+      <Label fx:id="resultA" layoutX="578.0" layoutY="438.0" prefHeight="50.0" prefWidth="55.0" text="result7" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
          </font>

@@ -8,6 +8,6 @@ package controllers;
  *
  * @author mariadefarges
  */
-public class changePasswordController {
+public class ChangePasswordController {
     
 }

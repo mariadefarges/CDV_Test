@@ -20,7 +20,7 @@
             </image>
         </ImageView>
 
-        <Label layoutX="382.0" layoutY="49.0" prefHeight="50.0" prefWidth="213.0" text="NEW PATIENT" textAlignment="CENTER" textFill="#da4646">
+        <Label layoutX="383.0" layoutY="49.0" prefHeight="50.0" prefWidth="213.0" text="NEW PATIENT" textAlignment="CENTER" textFill="#da4646">
             <font>
                 <Font name="Avenir Black" size="30.0" />
             </font>

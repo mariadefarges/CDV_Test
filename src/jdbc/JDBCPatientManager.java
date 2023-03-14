@@ -23,7 +23,7 @@ public class JDBCPatientManager implements PatientManager{
     
     @Override
     public void addPatient(Patient p, int doctorId) throws SQLException {
-        String sql = "INSERT INTO patient (name, surname, gender, birthDate,weight, bloodType, background, doctorId) VALUES (?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO patient (name, surname, gender, birthDate, weight, bloodType, background, doctorId) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
         prep.setString(1, p.getName());
         prep.setString(2, p.getSurname());
@@ -36,6 +36,18 @@ public class JDBCPatientManager implements PatientManager{
         prep.executeUpdate();
         prep.close();
     }
+    
+    /*@Override
+    public void editPatient(Patient p) throws SQLException {
+        String sql = "UPDATE patient SET name = ?, surname = ?, weight = ?, background = ? WHERE patientId = ?";
+        PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+        prep.setString(1, p.getName());
+        prep.setString(2, p.getSurname());
+        prep.setFloat(3, p.getWeight());
+
+        prep.executeUpdate();
+        prep.close();
+    }*/
 
 
     @Override

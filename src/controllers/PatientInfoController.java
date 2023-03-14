@@ -44,7 +44,7 @@ public class PatientInfoController {
     }
 
     @FXML
-    Button returnButton, editButton, diagnosisButton;
+    Button returnButton, diagnosisButton;
 
     @FXML
     Label nameText , surnameText, genderText, birthdateText, weightText, bloodtypeText, backgroundText;

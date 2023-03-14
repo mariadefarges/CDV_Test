@@ -19,6 +19,7 @@ import jdbc.JDBCDoctorManager;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import jdbc.JDBCPatientManager;
@@ -115,7 +116,7 @@ public class AddPatientController {
 
     @FXML
     private void addpatient(ActionEvent e) throws IOException, SQLException {
-
+                   
         String name = "";
         name = nameText.getText();
         if(name.equals("")){
@@ -166,7 +167,9 @@ public class AddPatientController {
         
         Patient patient = new Patient(name,surname, gender, birthdate, weight, bloodtype, background);
         jdbcpatientManager.addPatient(patient, doctor.getDoctorId());
+        
 
+        
         //SUCESS POP UP
         cp.correctPopup(1);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
