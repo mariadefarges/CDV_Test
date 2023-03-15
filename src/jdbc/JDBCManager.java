@@ -75,7 +75,8 @@ public class JDBCManager {
                 + "	temperatureChanges BOOLEAN NOT NULL,"
                 + "	highBloodPressure BOOLEAN NOT NULL,"
                 + "	irregularHeartBeat BOOLEAN NOT NULL,"
-                + "	weakness BOOLEAN NOT NULL )" ;
+                + "	weakness BOOLEAN NOT NULL,"
+                + "     patientId INTEGER REFERENCES patient(patientId) ON DELETE CASCADE )" ;
         stmt.executeUpdate(sql);
         sql = "CREATE TABLE disease "
                 + "(diseaseId INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -85,7 +86,9 @@ public class JDBCManager {
                 + "	heartBurn DOUBLE NOT NULL,"
                 + "	hypertension DOUBLE NOT NULL,"
                 + "	stroke DOUBLE NOT NULL,"
-                + "	arrythmia DOUBLE NOT NULL ) ";
+                + "	arrythmia DOUBLE NOT NULL,"
+                + "     patientId INTEGER REFERENCES patient(patientId) ON DELETE CASCADE )";
+        
         stmt.executeUpdate(sql);
         sql = "CREATE TABLE patient "
                 + "(patientId INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -96,10 +99,8 @@ public class JDBCManager {
                 + "     weight TEXT NOT NULL,"
                 + "	bloodType TEXT NOT NULL,"
                 + "     background TEXT NOT NULL,"
-                + "	doctorId INTEGER REFERENCES doctor(doctorId) ON DELETE CASCADE,"
-                + "	conditionId INTEGER REFERENCES condition(conditionId) ON DELETE CASCADE,"
-                + "	diseaseId INTEGER REFERENCES disease(diseaseId) ON DELETE CASCADE )";
-                
+                + "	doctorId INTEGER REFERENCES doctor(doctorId) ON DELETE CASCADE )";
+        
         stmt.executeUpdate(sql);
         System.out.println("Tables created");
     }

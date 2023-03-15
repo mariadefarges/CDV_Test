@@ -19,8 +19,8 @@ public class JDBCDiseaseManager implements DiseaseManager{
     }
     
     @Override
-    public void addDisease(Disease d) throws SQLException {
-        String sql = "INSERT INTO disease (myocardialInfarction, heartFailure, pArterialDisease, heartBurn,hypertension, stroke,arrythmia) VALUES (?,?,?,?,?,?,?)";
+    public void addDisease(Disease d, int patientId) throws SQLException {
+        String sql = "INSERT INTO disease (myocardialInfarction, heartFailure, pArterialDisease, heartBurn,hypertension, stroke,arrythmia, patientId) VALUES (?,?,?,?,?,?,?,?)";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
         prep.setInt(1, d.getMyocardialInfarction());
         prep.setInt(2, d.getHeartFailure());
@@ -29,6 +29,7 @@ public class JDBCDiseaseManager implements DiseaseManager{
         prep.setInt(5, d.getHypertension());
         prep.setInt(6, d.getStroke());
         prep.setInt(7, d.getArrythmia());
+        prep.setInt(8, patientId);
         prep.close();
     }
 
@@ -36,7 +37,7 @@ public class JDBCDiseaseManager implements DiseaseManager{
     @Override
     public Disease searchDiseaseById(int diseaseId) throws SQLException {
         Disease d = null;
-        String sql = "SELECT * FROM disease WHERE diseaseId= ?";
+        String sql = "SELECT * FROM disease WHERE patientId= ?";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
         prep.setInt(1, diseaseId);
         ResultSet rs = prep.executeQuery();
@@ -48,7 +49,6 @@ public class JDBCDiseaseManager implements DiseaseManager{
             int hypertension = rs.getInt("hypertension");
             int stroke = rs.getInt("stroke");
             int arrythmia = rs.getInt("arrythmia");
-            
              d = new Disease(myocardialInfarction, heartFailure, pArterialDisease, heartBurn, hypertension,stroke, arrythmia);
         }
         prep.close();

@@ -5,6 +5,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +18,9 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
+import jdbc.JDBCConditionManager;
 import jdbc.JDBCDoctorManager;
+import jdbc.JDBCManager;
 import jdbc.JDBCPatientManager;
 import pojos.Condition;
 import pojos.Doctor;
@@ -162,7 +165,7 @@ public class QuestionnaireController {
     }
 
     @FXML
-    private void changeToResults(ActionEvent e) throws IOException {
+    private void changeToResults(ActionEvent e) throws IOException, SQLException {
         boolean sweating = false;
         boolean nausea = false;
         boolean legsPain = false;
@@ -300,7 +303,11 @@ public class QuestionnaireController {
                 temperatureChanges, highBloodPressure, irregularHeartBeat, weakness);
         
         patient.setConditions(condition);
-
+        
+        JDBCManager manager = new JDBCManager();
+        JDBCConditionManager conditionmanager = new JDBCConditionManager(manager);
+        conditionmanager.addCondition(condition, patient.getPatientId());
+ 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
         root = loader.load();
         ResultsTestController resultstest = loader.getController();

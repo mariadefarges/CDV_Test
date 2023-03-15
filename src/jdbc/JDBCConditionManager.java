@@ -19,8 +19,8 @@ public class JDBCConditionManager implements ConditionManager{
     }
     
     @Override
-    public void addCondition(Condition c) throws SQLException {
-        String sql = "INSERT INTO condition (chestPain, sweating, nausea, legsPain, skinChanges, decreasedPulse, swellingLegs,shortnessOfBreath, fatigue, increasedPulse, headache , dizziness, upperBodyPain,temperatureChanges, highBloodPressure, irregularHeartBeat, weakness  ) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+    public void addCondition(Condition c, int patientId) throws SQLException {
+        String sql = "INSERT INTO condition (chestPain, sweating, nausea, legsPain, skinChanges, decreasedPulse, swellingLegs,shortnessOfBreath, fatigue, increasedPulse, headache , dizziness, upperBodyPain,temperatureChanges, highBloodPressure, irregularHeartBeat, weakness, patientId) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
         prep.setBoolean(1, c.isChestPain());
         prep.setBoolean(2, c.isSweating());
@@ -39,6 +39,7 @@ public class JDBCConditionManager implements ConditionManager{
         prep.setBoolean(15, c.isHighBloodPressure());
         prep.setBoolean(16, c.isIrregularHeartBeat());
         prep.setBoolean(17, c.isWeakness());
+        prep.setInt(18, patientId);
         prep.executeUpdate();
         prep.close();
     }
@@ -47,7 +48,7 @@ public class JDBCConditionManager implements ConditionManager{
     @Override
     public Condition searchConditionById(int conditionId) throws SQLException {
         Condition c = null;
-        String sql = "SELECT * FROM condition WHERE diseaseId= ?";
+        String sql = "SELECT * FROM condition WHERE patientId= ?";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
         prep.setInt(1, conditionId);
         ResultSet rs = prep.executeQuery();

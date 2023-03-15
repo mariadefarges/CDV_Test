@@ -11,6 +11,6 @@ import pojos.Condition;
  */
 public interface ConditionManager {
     
-        public void addCondition(Condition c) throws SQLException;
+        public void addCondition(Condition c, int patientId) throws SQLException;
         public Condition searchConditionById(int conditionId) throws SQLException;
 }

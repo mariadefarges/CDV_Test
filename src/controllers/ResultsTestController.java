@@ -7,6 +7,7 @@ package controllers;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +18,9 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import jdbc.JDBCConditionManager;
+import jdbc.JDBCDiseaseManager;
+import jdbc.JDBCManager;
 import static menu.Menu.execute;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
@@ -55,7 +59,7 @@ public class ResultsTestController {
     @FXML
     Hyperlink myocardialLink, heartfailureLink, PADLink, heartburnLink, hypertensionLink, strokeLink, arrythmiaLink;
 
-    public void setResults() {
+    public void setResults() throws SQLException {
         resultsText.setText("Mr/Mrs " + patient.getName() + " " + patient.getSurname() + " possible diagnosis:");
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
@@ -70,6 +74,10 @@ public class ResultsTestController {
         resultH.setText("" + patient.getDisease().getHypertension() + "%");
         resultS.setText("" + patient.getDisease().getStroke() + "%");
         resultA.setText("" + patient.getDisease().getArrythmia() + "%");
+        
+        JDBCManager manager = new JDBCManager();
+        JDBCDiseaseManager diseasemanager = new JDBCDiseaseManager(manager);
+        diseasemanager.addDisease(patient.getDisease(), patient.getPatientId());
 
     }
 
