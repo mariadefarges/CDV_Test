@@ -36,19 +36,6 @@ public class JDBCPatientManager implements PatientManager{
         prep.executeUpdate();
         prep.close();
     }
-     
-    /*@Override
-    public void editPatient(Patient p) throws SQLException {
-        String sql = "UPDATE patient SET name = ?, surname = ?, weight = ?, background = ? WHERE patientId = ?";
-        PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-        prep.setString(1, p.getName());
-        prep.setString(2, p.getSurname());
-        prep.setFloat(3, p.getWeight());
-
-        prep.executeUpdate();
-        prep.close();
-    }*/
-
 
     @Override
     public Patient searchPatientById(int patientId) throws SQLException {

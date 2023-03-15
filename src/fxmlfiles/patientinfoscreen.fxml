@@ -96,7 +96,7 @@
             <Font name="Arial Black" size="15.0" />
          </font>
       </Button>
-      <Button layoutX="717.0" layoutY="194.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="210.0" text="PREVIOUS DIAGNOSIS" textFill="#da4646">
+      <Button layoutX="717.0" layoutY="194.0" mnemonicParsing="false" onAction="#changeToprevious" prefHeight="33.0" prefWidth="210.0" text="PREVIOUS DIAGNOSIS" textFill="#da4646">
          <font>
             <Font name="Arial Black" size="15.0" />
          </font>

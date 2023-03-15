@@ -5,6 +5,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,8 +15,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import jdbc.JDBCDiseaseManager;
 import jdbc.JDBCDoctorManager;
+import jdbc.JDBCManager;
 import jdbc.JDBCPatientManager;
+import pojos.Disease;
 import pojos.Doctor;
 import pojos.Patient;
 
@@ -85,5 +89,29 @@ public class PatientInfoController {
         stage.setResizable(true);
         stage.show();
 
+    }
+    
+    @FXML
+    private void changeToprevious(ActionEvent e) throws IOException, SQLException {
+        JDBCManager manager= new JDBCManager();
+        JDBCDiseaseManager diseasemanager = new JDBCDiseaseManager(manager);
+        Disease disease = diseasemanager.searchDiseaseById(patient.getPatientId());        
+        if (disease.getDiseaseId() != 0){
+        patient.setDisease(disease);  
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
+        root = loader.load();
+        ResultsTestController resultstestcontroller = loader.getController();
+        resultstestcontroller.setDoctor(doctor);
+        resultstestcontroller.setPatient(patient);
+        resultstestcontroller.setResults();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.show();
+        }
+        else{
+            //ERROR POP UP
+        }
     }
 }

@@ -24,7 +24,6 @@ import pojos.Doctor;
  */
 public class DoctorInfoController {
 
-    static JDBCDoctorManager jdbcdoctorManager;
 
     private Parent root;
     private Stage stage;
@@ -69,8 +68,8 @@ public class DoctorInfoController {
     private void changePassword(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/changepassword.fxml"));
         root = loader.load();
-        MainScreenController mainscreencontroller = loader.getController();
-        mainscreencontroller.setDoctor(doctor);
+        ChangePasswordController changepassword = loader.getController();
+        changepassword.setDoctor(doctor);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

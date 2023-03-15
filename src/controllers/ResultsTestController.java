@@ -61,12 +61,6 @@ public class ResultsTestController {
 
     public void setResults() throws SQLException {
         resultsText.setText("Mr/Mrs " + patient.getName() + " " + patient.getSurname() + " possible diagnosis:");
-        KieServices ks = KieServices.Factory.get();
-        KieContainer kc = ks.getKieClasspathContainer();
-        execute(kc);
-        KieSession ksession = kc.newKieSession("CardiovascularDiagnosisKS");
-        ksession.insert(patient);
-        ksession.fireAllRules();
         resultMI.setText("" + patient.getDisease().getMyocardialInfarction() + "%");
         resultHF.setText("" + patient.getDisease().getHeartFailure() + "%");
         resultPAD.setText("" + patient.getDisease().getpArterialDisease() + "%");
@@ -78,6 +72,7 @@ public class ResultsTestController {
         JDBCManager manager = new JDBCManager();
         JDBCDiseaseManager diseasemanager = new JDBCDiseaseManager(manager);
         diseasemanager.addDisease(patient.getDisease(), patient.getPatientId());
+        System.out.println(patient.getDisease());
 
     }
 

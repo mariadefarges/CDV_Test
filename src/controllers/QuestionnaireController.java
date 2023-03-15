@@ -22,6 +22,10 @@ import jdbc.JDBCConditionManager;
 import jdbc.JDBCDoctorManager;
 import jdbc.JDBCManager;
 import jdbc.JDBCPatientManager;
+import static menu.Menu.execute;
+import org.kie.api.KieServices;
+import org.kie.api.runtime.KieContainer;
+import org.kie.api.runtime.KieSession;
 import pojos.Condition;
 import pojos.Doctor;
 import pojos.Patient;
@@ -307,6 +311,14 @@ public class QuestionnaireController {
         JDBCManager manager = new JDBCManager();
         JDBCConditionManager conditionmanager = new JDBCConditionManager(manager);
         conditionmanager.addCondition(condition, patient.getPatientId());
+        
+        
+        KieServices ks = KieServices.Factory.get();
+        KieContainer kc = ks.getKieClasspathContainer();
+        execute(kc);
+        KieSession ksession = kc.newKieSession("CardiovascularDiagnosisKS");
+        ksession.insert(patient);
+        ksession.fireAllRules();
  
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
         root = loader.load();

@@ -12,6 +12,6 @@ import pojos.Disease;
 public interface DiseaseManager {
     
     public void addDisease(Disease d, int patientId) throws SQLException;
-     public Disease searchDiseaseById(int diseaseId) throws SQLException;
+     public Disease searchDiseaseById(int patientId) throws SQLException;
     
 }

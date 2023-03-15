@@ -77,7 +77,7 @@ public class JDBCDoctorManager implements DoctorManager {
     }
 
     @Override
-    public Doctor checkPassword(String email, String password) throws SQLException {
+    public Doctor checkUser(String email, String password) throws SQLException {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(password.getBytes());
@@ -107,5 +107,39 @@ public class JDBCDoctorManager implements DoctorManager {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @Override
+    public void changePassword(String new_password, int doctorId) throws SQLException, NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(new_password.getBytes());
+        byte[] hash = md.digest();
+        String hash2 = new String(hash, 0, hash.length);
+        String sql = "UPDATE doctor SET password=? WHERE doctorId = ?";
+        PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+        prep.setString(1, hash2);
+        prep.setInt(2, doctorId);
+        prep.executeUpdate();
+
+    }
+
+    @Override
+    public int checkPassword(String password) throws SQLException , NoSuchAlgorithmException {
+        int doctorId = 0;
+        MessageDigest md = MessageDigest.getInstance("MD5");
+            md.update(password.getBytes());
+            byte[] hash = md.digest();
+            String hash2 = new String(hash, 0, hash.length);
+            Doctor d = null;
+            String sql = "SELECT doctorId FROM doctor WHERE password = ?";
+            PreparedStatement prep = manager.getConnection().prepareStatement(sql);
+            prep.setString(1, hash2);
+            ResultSet rs = prep.executeQuery();
+            if (rs.next()) {
+                doctorId = rs.getInt("doctorId");           
+            }
+            prep.close();
+            rs.close();
+            return doctorId;
     }
 }

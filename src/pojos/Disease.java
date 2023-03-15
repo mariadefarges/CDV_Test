@@ -32,6 +32,17 @@ public class Disease {
         this.arrythmia = arrythmia;
     }
     
+        public Disease(int diseaseId, int myocardialInfarction, int heartFailure, int pArterialDisease, int heartBurn, int hypertension, int stroke, int arrythmia) {
+        this.diseaseId = diseaseId;
+        this.myocardialInfarction = myocardialInfarction;
+        this.heartFailure = heartFailure;
+        this.pArterialDisease = pArterialDisease;
+        this.heartBurn = heartBurn;
+        this.hypertension = hypertension;
+        this.stroke = stroke;
+        this.arrythmia = arrythmia;
+    }
+    
     public Disease(){
         this.myocardialInfarction = 0;
         this.heartFailure = 0;

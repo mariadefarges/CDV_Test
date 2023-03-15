@@ -30,18 +30,20 @@ public class JDBCDiseaseManager implements DiseaseManager{
         prep.setInt(6, d.getStroke());
         prep.setInt(7, d.getArrythmia());
         prep.setInt(8, patientId);
+        prep.executeUpdate();
         prep.close();
     }
 
 
     @Override
-    public Disease searchDiseaseById(int diseaseId) throws SQLException {
+    public Disease searchDiseaseById(int patientId) throws SQLException {
         Disease d = null;
         String sql = "SELECT * FROM disease WHERE patientId= ?";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-        prep.setInt(1, diseaseId);
+        prep.setInt(1, patientId);
         ResultSet rs = prep.executeQuery();
         while (rs.next()) {
+            int diseaseId = rs.getInt("diseaseId");
             int myocardialInfarction = rs.getInt("myocardialInfarction");
             int heartFailure = rs.getInt("heartFailure");
             int pArterialDisease = rs.getInt("pArterialDisease");
@@ -49,7 +51,7 @@ public class JDBCDiseaseManager implements DiseaseManager{
             int hypertension = rs.getInt("hypertension");
             int stroke = rs.getInt("stroke");
             int arrythmia = rs.getInt("arrythmia");
-             d = new Disease(myocardialInfarction, heartFailure, pArterialDisease, heartBurn, hypertension,stroke, arrythmia);
+            d = new Disease(diseaseId, myocardialInfarction, heartFailure, pArterialDisease, heartBurn, hypertension,stroke, arrythmia);
         }
         prep.close();
         rs.close();

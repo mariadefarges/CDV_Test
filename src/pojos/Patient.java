@@ -93,6 +93,11 @@ public class Patient implements Serializable{
         return disease;
     }
 
+    public void setDisease(Disease disease) {
+        this.disease = disease;
+    }
+   
+
     public String getName() {
         return name;
     }
