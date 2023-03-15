@@ -32,10 +32,6 @@ public class DoctorInfoController {
 
     Doctor doctor;
 
-    public void setJDBC(JDBCDoctorManager jdbcdoctorManager) {
-        this.jdbcdoctorManager = jdbcdoctorManager;
-    }
-
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }

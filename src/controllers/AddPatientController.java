@@ -22,6 +22,7 @@ import java.time.LocalDate;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import jdbc.JDBCManager;
 import jdbc.JDBCPatientManager;
 import pojos.Doctor;
 import pojos.Patient;
@@ -32,8 +33,6 @@ import pojos.Patient;
  */
 public class AddPatientController {
 
-    static JDBCDoctorManager jdbcdoctorManager;
-    static JDBCPatientManager jdbcpatientManager;
     private ErrorPopUpController ep = new ErrorPopUpController();
     private CorrectPopUpController cp = new CorrectPopUpController();
 
@@ -96,7 +95,7 @@ public class AddPatientController {
     RadioButton maleButton, femaleButton;
 
     ToggleGroup genderGroup;
-    
+
     Doctor doctor;
 
     public void setDoctor(Doctor doctor) {
@@ -108,28 +107,23 @@ public class AddPatientController {
         maleButton.setToggleGroup(this.genderGroup);
         femaleButton.setToggleGroup(this.genderGroup);
     }
-    
-        public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
-        this.jdbcdoctorManager = jdbcdoctorManager;
-        this.jdbcpatientManager = jdbcpatientManager;
-    }
 
     @FXML
     private void addpatient(ActionEvent e) throws IOException, SQLException {
-                   
+
         String name = "";
         name = nameText.getText();
-        if(name.equals("")){
+        if (name.equals("")) {
             ep.errorPopup(10);
             return;
         }
         String surname = "";
         surname = surnameText.getText();
-        if(surname.equals("")){
+        if (surname.equals("")) {
             ep.errorPopup(11);
             return;
         }
-        
+
         //Gender buttons
         String gender = "";
         if (genderGroup.getSelectedToggle() == maleButton) {
@@ -138,7 +132,7 @@ public class AddPatientController {
         if (genderGroup.getSelectedToggle() == femaleButton) {
             gender = "Female";
         }
-        if (gender.equals("")){
+        if (gender.equals("")) {
             System.out.println("Any gender selected");
             ep.errorPopup(4);
             return;
@@ -146,29 +140,28 @@ public class AddPatientController {
         //Date Picker
         LocalDate date = dob.getValue();
         Date birthdate = Date.valueOf(date);
-        
 
         String weighttext = "";
         weighttext = weightText.getText();
-        if(weighttext.equals("")){
+        if (weighttext.equals("")) {
             ep.errorPopup(12);
             return;
         }
         Float weight = Float.parseFloat(weighttext);
-        
+
         String bloodtype = group + " " + rh;
-        
-        String background ="";
+
+        String background = "";
         background = backgroundText.getText();
-        if(background.equals("")){
+        if (background.equals("")) {
             ep.errorPopup(13);
             return;
         }
-        
-        Patient patient = new Patient(name,surname, gender, birthdate, weight, bloodtype, background);
-        jdbcpatientManager.addPatient(patient, doctor.getDoctorId());
-        
 
+        Patient patient = new Patient(name, surname, gender, birthdate, weight, bloodtype, background);
+        JDBCManager manager = new JDBCManager();
+        JDBCPatientManager patientmanager = new JDBCPatientManager(manager);
+        patientmanager.addPatient(patient, doctor.getDoctorId());
         
         //SUCESS POP UP
         cp.correctPopup(1);

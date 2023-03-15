@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="643.0" prefWidth="970.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ResultsTestController">
     <children>
         <ImageView fitHeight="655.0" fitWidth="987.0" layoutX="-9.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true"> 
             <image>
@@ -17,7 +17,7 @@
             </image>
         </ImageView>
 
-        <Label fx:id="patientText" layoutX="214.0" layoutY="46.0" prefHeight="50.0" prefWidth="548.0" text="resultsText" textAlignment="CENTER" textFill="#da4646">
+        <Label fx:id="resultsText" layoutX="214.0" layoutY="46.0" prefHeight="50.0" prefWidth="548.0" text="resultsText" textAlignment="CENTER" textFill="#da4646">
             <font>
                 <Font name="Avenir Black" size="30.0" />
             </font>
@@ -27,7 +27,7 @@
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="returnButton" layoutX="460.0" layoutY="592.0" mnemonicParsing="false" text="Return" />
+      <Button fx:id="returnButton" layoutX="460.0" layoutY="592.0" mnemonicParsing="false" onAction="#returnToPatientInfo" text="Return" />
       <Label layoutX="281.0" layoutY="183.0" prefHeight="50.0" prefWidth="203.0" text="HEART FAILURE" textAlignment="CENTER" textFill="#da4646">
          <font>
             <Font name="Avenir Black" size="15.0" />
@@ -93,17 +93,17 @@
             <Font name="Avenir Black" size="15.0" />
          </font>
       </Label>
-      <Hyperlink layoutX="718.0" layoutY="144.0" prefHeight="25.0" prefWidth="209.0" text="myocardialLink" />
+      <Hyperlink fx:id="myocardialLink" layoutX="718.0" layoutY="144.0" onMouseClicked="#myocardialInfarctionLink" prefHeight="25.0" prefWidth="209.0" text="https://www.ncbi.nlm.nih.gov/books/NBK537076/" />
       <Text layoutX="721.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sources of information:" wrappingWidth="202.9999972094571">
          <font>
             <Font name="Arial Black" size="13.0" />
          </font>
       </Text>
-      <Hyperlink layoutX="718.0" layoutY="196.0" prefHeight="25.0" prefWidth="209.0" text="heartfailureLink" />
-      <Hyperlink layoutX="718.0" layoutY="242.0" prefHeight="25.0" prefWidth="209.0" text="PADLink" />
-      <Hyperlink layoutX="718.0" layoutY="293.0" prefHeight="25.0" prefWidth="209.0" text="heartBurnLink" />
-      <Hyperlink layoutX="718.0" layoutY="343.0" prefHeight="25.0" prefWidth="209.0" text="heartfailureLink" />
-      <Hyperlink layoutX="718.0" layoutY="398.0" prefHeight="25.0" prefWidth="209.0" text="strokeLink" />
-      <Hyperlink layoutX="718.0" layoutY="451.0" prefHeight="25.0" prefWidth="209.0" text="arrythmiaLink" />
+      <Hyperlink fx:id="heartfailureLink" layoutX="718.0" layoutY="196.0" onMouseClicked="#heartfailureLink" prefHeight="25.0" prefWidth="209.0" text="https://medlineplus.gov/heartfailure.html" />
+      <Hyperlink fx:id="PADLink" layoutX="718.0" layoutY="242.0" onMouseClicked="#padLink" prefHeight="25.0" prefWidth="209.0" text="https://www.ncbi.nlm.nih.gov/books/NBK430745/" />
+      <Hyperlink fx:id="heartburnLink" layoutX="718.0" layoutY="293.0" onMouseClicked="#heartBurnLink" prefHeight="25.0" prefWidth="209.0" text="https://my.clevelandclinic.org/health/diseases/9617-heartburn-overview" />
+      <Hyperlink fx:id="hypertensionLink" layoutX="718.0" layoutY="343.0" onMouseClicked="#hypertensionLink" prefHeight="25.0" prefWidth="209.0" text="https://www.nhs.uk/conditions/high-blood-pressure-hypertension/" />
+      <Hyperlink fx:id="strokeLink" layoutX="718.0" layoutY="398.0" onMouseClicked="#strokeLink" prefHeight="25.0" prefWidth="209.0" text="https://www.nhlbi.nih.gov/health/stroke" />
+      <Hyperlink fx:id="arrythmiaLink" layoutX="718.0" layoutY="451.0" onMouseClicked="#arrythmiaLink" prefHeight="25.0" prefWidth="209.0" text="https://medlineplus.gov/arrhythmia.html" />
     </children>
 </AnchorPane>

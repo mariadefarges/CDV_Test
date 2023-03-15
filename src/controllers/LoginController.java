@@ -51,7 +51,7 @@ public class LoginController {
 
     @FXML
     private void checkLogin(ActionEvent e) throws IOException, SQLException {
-
+        
         String email = emailText.getText();
         String password = passwordText.getText();
         Doctor doctor = jdbcdoctorManager.checkPassword(email, password);
@@ -64,9 +64,7 @@ public class LoginController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
         MainScreenController maincontroller = loader.getController();
-        maincontroller.setJDBC(jdbcdoctorManager, jdbcpatientManager);
-        maincontroller.setDoctor(doctor);
-        maincontroller.setWelcomeText("Welcome Mr/Mrs " + doctor.getName() + " " + doctor.getSurname());
+        maincontroller.setDoctor(doctor);     
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -80,7 +78,6 @@ public class LoginController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/firstscreen.fxml"));
         root = loader.load();
-        //LoginController logincontroller = loader.getController();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

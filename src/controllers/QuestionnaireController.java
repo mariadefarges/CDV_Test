@@ -28,25 +28,21 @@ import pojos.Patient;
  * @author mariadefarges
  */
 public class QuestionnaireController {
-
-    static JDBCDoctorManager jdbcdoctorManager;
-    static JDBCPatientManager jdbcpatientManager;
-
+    
     private Parent root;
     private Stage stage;
     private Scene scene;
-
+    Doctor doctor;
     Patient patient;
 
-    public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
-        this.jdbcdoctorManager = jdbcdoctorManager;
-        this.jdbcpatientManager = jdbcpatientManager;
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
     }
-
+    
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
-
+ 
     @FXML
     RadioButton yesChestpain, noChestpain;
 
@@ -308,7 +304,9 @@ public class QuestionnaireController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
         root = loader.load();
         ResultsTestController resultstest = loader.getController();
+        resultstest.setDoctor(doctor);
         resultstest.setPatient(patient);
+        resultstest.setResults();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

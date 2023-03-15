@@ -25,9 +25,6 @@ import pojos.Doctor;
  */
 public class MainScreenController {
 
-    private static JDBCDoctorManager jdbcdoctorManager;
-    private static JDBCPatientManager jdbcpatientManager;
-
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -39,17 +36,9 @@ public class MainScreenController {
 
     @FXML
     Label welcomeText;
-
-    public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
-        this.jdbcdoctorManager = jdbcdoctorManager;
-        this.jdbcpatientManager = jdbcpatientManager;
-    }
-
+    
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
-    }
-
-    public void setWelcomeText(String welcomeText) {
         this.welcomeText.setText("Welcome Mr/Mrs " + doctor.getName() + " " + doctor.getSurname());
     }
 
@@ -58,7 +47,6 @@ public class MainScreenController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/addpatientscreen.fxml"));
         root = loader.load();
         AddPatientController addpatientcontroller = loader.getController();
-        addpatientcontroller.setJDBC(jdbcdoctorManager, jdbcpatientManager);
         addpatientcontroller.setButtons();
         addpatientcontroller.setDoctor(doctor);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -74,7 +62,6 @@ public class MainScreenController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/doctorinfoscreen.fxml"));
         root = loader.load();
         DoctorInfoController doctorinfocontroller = loader.getController();
-        doctorinfocontroller.setJDBC(jdbcdoctorManager);
         doctorinfocontroller.setDoctor(doctor);
         doctorinfocontroller.setInfo();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
@@ -90,7 +77,6 @@ public class MainScreenController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/listpatientscreen.fxml"));
         root = loader.load();
         ListofPatientsController listofpatients = loader.getController();
-        listofpatients.setJDBC(jdbcdoctorManager, jdbcpatientManager);
         listofpatients.setDoctor(doctor);
         listofpatients.setTable();
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();

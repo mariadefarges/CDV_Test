@@ -24,23 +24,20 @@ import pojos.Patient;
  * @author mariadefarges
  */
 public class PatientInfoController {
-    
-    static JDBCDoctorManager jdbcdoctorManager;
-    static JDBCPatientManager jdbcpatientManager;
 
     private Parent root;
     private Stage stage;
     private Scene scene;
+    Patient patient;
     
     Doctor doctor;
-    
-    public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
-        this.jdbcdoctorManager = jdbcdoctorManager;
-        this.jdbcpatientManager = jdbcpatientManager;
-    }
+
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
+    }
+    public void setPatient(Patient patient){
+        this.patient = patient;
     }
 
     @FXML
@@ -49,23 +46,39 @@ public class PatientInfoController {
     @FXML
     Label nameText , surnameText, genderText, birthdateText, weightText, bloodtypeText, backgroundText;
     
-    public void setInfo (Patient patient){
-        nameText.setText(patient.getName());
-        surnameText.setText(patient.getSurname());
-        genderText.setText(patient.getGender());
-        birthdateText.setText(patient.getBirthDate().toString());
-        weightText.setText(patient.getWeight().toString());
-        bloodtypeText.setText(patient.getBloodType());
-        backgroundText.setText(patient.getBackground());       
+    public void setInfo (){
+        nameText.setText(this.patient.getName());
+        surnameText.setText(this.patient.getSurname());
+        genderText.setText(this.patient.getGender());
+        birthdateText.setText(this.patient.getBirthDate().toString());
+        weightText.setText(this.patient.getWeight().toString());
+        bloodtypeText.setText(this.patient.getBloodType());
+        backgroundText.setText(this.patient.getBackground());       
     }
     
+    
+    
+     @FXML
+    private void changeToQuestionnaire(ActionEvent e) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/questionnairescreen.fxml"));
+        root = loader.load();
+        QuestionnaireController questionnairecontroller = loader.getController();
+        questionnairecontroller.setDoctor(doctor);
+        questionnairecontroller.setPatient(patient);
+        questionnairecontroller.setButtons();
+        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setResizable(true);
+        stage.show();
+    }
     
     @FXML
     private void returnToMainScreen(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
-        MainScreenController mainscreencontroller = loader.getController();
-        mainscreencontroller.setDoctor(doctor);
+        MainScreenController maincontroller = loader.getController();
+        maincontroller.setDoctor(doctor);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

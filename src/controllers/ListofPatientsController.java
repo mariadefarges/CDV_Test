@@ -20,6 +20,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import jdbc.JDBCDoctorManager;
+import jdbc.JDBCManager;
 import jdbc.JDBCPatientManager;
 import pojos.Doctor;
 import pojos.Patient;
@@ -29,9 +30,6 @@ import pojos.Patient;
  * @author mariadefarges
  */
 public class ListofPatientsController {
-
-    static JDBCDoctorManager jdbcdoctorManager;
-    static JDBCPatientManager jdbcpatientManager;
 
     private Parent root;
     private Stage stage;
@@ -44,7 +42,7 @@ public class ListofPatientsController {
     Label listText;
 
     Doctor doctor;
-
+    
     @FXML
     TableView<Patient> ResultsTableView;
 
@@ -54,19 +52,16 @@ public class ListofPatientsController {
     @FXML
     TableColumn<Patient, String> tableName = new TableColumn<>("tableName");
 
-    public void setJDBC(JDBCDoctorManager jdbcdoctorManager, JDBCPatientManager jdbcpatientManager) {
-        this.jdbcdoctorManager = jdbcdoctorManager;
-        this.jdbcpatientManager = jdbcpatientManager;
-    }
-
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
 
     public void setTable() {
         try {
+            JDBCManager manager = new JDBCManager();
+            JDBCPatientManager patientmanager = new JDBCPatientManager(manager);
             List<Patient> patients;
-            patients = jdbcpatientManager.getPatientsOfDoctor(doctor.getDoctorId());
+            patients = patientmanager.getPatientsOfDoctor(doctor.getDoctorId());
             listText.setText("List of Mr/Mrs " + doctor.getName() + " " + doctor.getSurname() + " patients:");
             if (!patients.isEmpty()) {
                 ResultsTableView.getItems().clear();
@@ -94,9 +89,9 @@ public class ListofPatientsController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/patientinfoscreen.fxml"));
             root = loader.load();
             PatientInfoController patientcontroller = loader.getController();
-            patientcontroller.setJDBC(jdbcdoctorManager, jdbcpatientManager);
             patientcontroller.setDoctor(doctor);
-            patientcontroller.setInfo(patient);
+            patientcontroller.setPatient(patient);
+            patientcontroller.setInfo();
             //drs.DiseaseView(disease);
             stage = (Stage) ((Node) Mevent.getSource()).getScene().getWindow();
             scene = new Scene(root);
