@@ -21,7 +21,6 @@ import javafx.stage.Stage;
 import jdbc.JDBCConditionManager;
 import jdbc.JDBCDiseaseManager;
 import jdbc.JDBCManager;
-import static menu.Menu.execute;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;

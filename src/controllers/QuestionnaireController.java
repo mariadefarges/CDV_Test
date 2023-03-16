@@ -22,7 +22,6 @@ import jdbc.JDBCConditionManager;
 import jdbc.JDBCDoctorManager;
 import jdbc.JDBCManager;
 import jdbc.JDBCPatientManager;
-import static menu.Menu.execute;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -307,6 +306,13 @@ public class QuestionnaireController {
                 temperatureChanges, highBloodPressure, irregularHeartBeat, weakness);
         
         patient.setConditions(condition);
+        patient.getDisease().setArrythmia(0);
+        patient.getDisease().setHeartBurn(0);
+        patient.getDisease().setHeartFailure(0);
+        patient.getDisease().setHypertension(0);
+        patient.getDisease().setMyocardialInfarction(0);
+        patient.getDisease().setStroke(0);
+        patient.getDisease().setpArterialDisease(0);
         
         JDBCManager manager = new JDBCManager();
         JDBCConditionManager conditionmanager = new JDBCConditionManager(manager);
@@ -315,10 +321,19 @@ public class QuestionnaireController {
         
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
-        execute(kc);
+
         KieSession ksession = kc.newKieSession("CardiovascularDiagnosisKS");
         ksession.insert(patient);
         ksession.fireAllRules();
+        System.out.println("Myocardial Infarction: " + patient.getDisease().getMyocardialInfarction());
+        System.out.println("Heart Failure: " + patient.getDisease().getHeartFailure());
+        System.out.println("Peripheral Arterial Disease: " + patient.getDisease().getpArterialDisease());
+        System.out.println("Heart Burn: " + patient.getDisease().getHeartBurn());
+        System.out.println("Stroke: " + patient.getDisease().getStroke());
+        System.out.println("Arrythmia: " + patient.getDisease().getArrythmia());
+        System.out.println("Hypertension: " + patient.getDisease().getHypertension());
+        ksession.dispose();
+
  
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
         root = loader.load();
