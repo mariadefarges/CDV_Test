@@ -151,13 +151,14 @@ public class AddPatientController {
             ep.errorPopup(12);
             return;
         }
-
-        Float weight = Float.parseFloat(weighttext);
-        if (weight.isNaN()) {
+        boolean isNumeric = ( weighttext != null &&   weighttext.matches("[0-9]+"));
+        if (isNumeric == false) {
             ep.errorPopup(19);
             return;
         }
 
+        Float weight = Float.parseFloat(weighttext);
+       
         if (group == null || rh == null) {
             ep.errorPopup(20);
             return;

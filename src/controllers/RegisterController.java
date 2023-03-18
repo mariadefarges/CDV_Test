@@ -30,7 +30,6 @@ import javafx.stage.Stage;
  */
 public class RegisterController {
 
-    //private static JDBCDoctorManager jdbcdoctorManager;
     private static JDBCDoctorManager jdbcdoctorManager;
 
     private ErrorPopUpController ep = new ErrorPopUpController();
