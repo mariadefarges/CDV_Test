@@ -32,7 +32,7 @@ public class RegisterController {
 
     //private static JDBCDoctorManager jdbcdoctorManager;
     private static JDBCDoctorManager jdbcdoctorManager;
-    //private ErrorPopUp ep = new ErrorPopUp();
+
     private ErrorPopUpController ep = new ErrorPopUpController();
     private CorrectPopUpController cp = new CorrectPopUpController();
     private Parent root;
@@ -63,15 +63,15 @@ public class RegisterController {
 
     @FXML
     RadioButton femaleButton;
-    
+
     ToggleGroup genderGroup;
 
-   public void setJDBCdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
+    public void setJDBCdoctorManager(JDBCDoctorManager jdbcdoctorManager) {
         RegisterController.jdbcdoctorManager = jdbcdoctorManager;
-    
+
     }
-    
-    public void setButtons(){
+
+    public void setButtons() {
         genderGroup = new ToggleGroup();
         maleButton.setToggleGroup(genderGroup);
         femaleButton.setToggleGroup(genderGroup);
@@ -80,34 +80,33 @@ public class RegisterController {
     @FXML
     private void checkRegister(ActionEvent e) throws IOException, NoSuchAlgorithmException, SQLException {
 
-        String email="";
-        String password="";
-        String repeatpw= "";
+        String email = "";
+        String password = "";
+        String repeatpw = "";
 
         email = emailText.getText();
 
         String checkEmail = jdbcdoctorManager.checkEmail(email);
 
-       
         if (!checkEmail.equals("")) {
             System.out.println("The email introduced is already registered. \n");
             ep.errorPopup(1);
-           
+
             return;
         }
-        if(email.equals("")){
+        if (email.equals("")) {
             ep.errorPopup(5);
             return;
         }
         password = passwordText.getText();
         repeatpw = repeatPasswordText.getText();
 
-        if (!password.equals(repeatpw)){
+        if (!password.equals(repeatpw)) {
             System.out.println("The password does not coincide");
             ep.errorPopup(3);
             return;
         }
-        if(password.equals("") || repeatpw.equals("")){
+        if (password.equals("") || repeatpw.equals("")) {
             ep.errorPopup(6);
             return;
         }
@@ -118,19 +117,19 @@ public class RegisterController {
 
         String name = "";
         name = nameText.getText();
-         if(name.equals("")){
+        if (name.equals("")) {
             ep.errorPopup(7);
             return;
         }
         String surname = "";
-        surname= surnameText.getText();
-         if(surname.equals("")){
+        surname = surnameText.getText();
+        if (surname.equals("")) {
             ep.errorPopup(8);
             return;
         }
         String hospital = "";
         hospital = hospitalText.getText();
-         if(hospital.equals("")){
+        if (hospital.equals("")) {
             ep.errorPopup(9);
             return;
         }
@@ -143,7 +142,7 @@ public class RegisterController {
         if (genderGroup.getSelectedToggle() == femaleButton) {
             gender = "Female";
         }
-         if (gender.equals("")){
+        if (gender.equals("")) {
             System.out.println("Any gender selected");
             ep.errorPopup(4);
             return;
@@ -154,7 +153,7 @@ public class RegisterController {
 
         // successPopup.successPopup(12); USER SAVED SUCCESSFULLY
         cp.correctPopup(0);
-      
+
         //RETURN TO FIRST SCREEN
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/firstscreen.fxml"));
         root = loader.load();
@@ -176,7 +175,5 @@ public class RegisterController {
         stage.setResizable(true);
         stage.setTitle("Log In");
         stage.show();
-
     }
-
 }

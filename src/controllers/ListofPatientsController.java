@@ -5,7 +5,10 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -35,6 +38,8 @@ public class ListofPatientsController {
     private Stage stage;
     private Scene scene;
 
+    private ErrorPopUpController ep = new ErrorPopUpController();
+
     @FXML
     Button returnButton;
 
@@ -42,7 +47,7 @@ public class ListofPatientsController {
     Label listText;
 
     Doctor doctor;
-    
+
     @FXML
     TableView<Patient> ResultsTableView;
 
@@ -56,48 +61,37 @@ public class ListofPatientsController {
         this.doctor = doctor;
     }
 
-    public void setTable() {
-        try {
-            JDBCManager manager = new JDBCManager();
-            JDBCPatientManager patientmanager = new JDBCPatientManager(manager);
-            List<Patient> patients;
-            patients = patientmanager.getPatientsOfDoctor(doctor.getDoctorId());
-            listText.setText("List of Mr/Mrs " + doctor.getName() + " " + doctor.getSurname() + " patients:");
-            if (!patients.isEmpty()) {
-                ResultsTableView.getItems().clear();
-                ResultsTableView.getColumns().clear();
-                ResultsTableView.getItems().addAll(patients);
-                tableID.setCellValueFactory(data -> new SimpleStringProperty(Integer.toString(data.getValue().getPatientId())));
-                tableName.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName() + " " + data.getValue().getSurname()));
-                ResultsTableView.getColumns().addAll(tableID, tableName);
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            // ErrorPopup.errorPopup(0);
-            return;
+    public void setTable() throws SQLException {
+        JDBCManager manager = new JDBCManager();
+        JDBCPatientManager patientmanager = new JDBCPatientManager(manager);
+        List<Patient> patients;
+        patients = patientmanager.getPatientsOfDoctor(doctor.getDoctorId());
+        listText.setText("List of Mr/Mrs " + doctor.getName() + " " + doctor.getSurname() + " patients:");
+        if (!patients.isEmpty()) {
+            ResultsTableView.getItems().clear();
+            ResultsTableView.getColumns().clear();
+            ResultsTableView.getItems().addAll(patients);
+            tableID.setCellValueFactory(data -> new SimpleStringProperty(Integer.toString(data.getValue().getPatientId())));
+            tableName.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getName() + " " + data.getValue().getSurname()));
+            ResultsTableView.getColumns().addAll(tableID, tableName);
         }
     }
 
     @FXML
-	private void selectedPatient(MouseEvent Mevent) throws IOException {
+    private void selectedPatient(MouseEvent Mevent) throws IOException {
         Patient patient = ResultsTableView.getSelectionModel().getSelectedItem();
-        if (patient == null) {
-            //Error POP UP
-            //System.out.println("Nothing selected");
-        } else {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/patientinfoscreen.fxml"));
-            root = loader.load();
-            PatientInfoController patientcontroller = loader.getController();
-            patientcontroller.setDoctor(doctor);
-            patientcontroller.setPatient(patient);
-            patientcontroller.setInfo();
-            //drs.DiseaseView(disease);
-            stage = (Stage) ((Node) Mevent.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/patientinfoscreen.fxml"));
+        root = loader.load();
+        PatientInfoController patientcontroller = loader.getController();
+        patientcontroller.setDoctor(doctor);
+        patientcontroller.setPatient(patient);
+        patientcontroller.setInfo();
+        //drs.DiseaseView(disease);
+        stage = (Stage) ((Node) Mevent.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -111,7 +105,5 @@ public class ListofPatientsController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-
 }

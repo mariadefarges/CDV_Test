@@ -32,7 +32,7 @@ public class JDBCDoctorManager implements DoctorManager {
         prep.setString(2, d.getSurname());
         prep.setString(3, d.getGender());
         prep.setString(4, d.getHospital());
-        prep.setString(5, d.getEmail());
+        prep.setString(5, d.getEmail().toLowerCase());
         prep.setString(6, d.getPassword());
         prep.executeUpdate();
         prep.close();
@@ -65,7 +65,7 @@ public class JDBCDoctorManager implements DoctorManager {
         String checkemail = "";
         String sql = "SELECT email FROM doctor WHERE email = ?";
         PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-        prep.setString(1, email);
+        prep.setString(1, email.toLowerCase());
         ResultSet rs = prep.executeQuery();
 
         if (rs.next()) {
@@ -86,7 +86,7 @@ public class JDBCDoctorManager implements DoctorManager {
             Doctor d = null;
             String sql = "SELECT * FROM doctor WHERE email = ? AND password = ?";
             PreparedStatement prep = manager.getConnection().prepareStatement(sql);
-            prep.setString(1, email);
+            prep.setString(1, email.toLowerCase());
             prep.setString(2, hash2);
             ResultSet rs = prep.executeQuery();
             if (rs.next()) {

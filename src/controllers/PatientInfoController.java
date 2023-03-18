@@ -33,14 +33,16 @@ public class PatientInfoController {
     private Stage stage;
     private Scene scene;
     Patient patient;
-    
+
     Doctor doctor;
 
+    private ErrorPopUpController ep = new ErrorPopUpController();
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
-    public void setPatient(Patient patient){
+
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
@@ -48,21 +50,19 @@ public class PatientInfoController {
     Button returnButton, diagnosisButton;
 
     @FXML
-    Label nameText , surnameText, genderText, birthdateText, weightText, bloodtypeText, backgroundText;
-    
-    public void setInfo (){
+    Label nameText, surnameText, genderText, birthdateText, weightText, bloodtypeText, backgroundText;
+
+    public void setInfo() {
         nameText.setText(this.patient.getName());
         surnameText.setText(this.patient.getSurname());
         genderText.setText(this.patient.getGender());
         birthdateText.setText(this.patient.getBirthDate().toString());
         weightText.setText(this.patient.getWeight().toString());
         bloodtypeText.setText(this.patient.getBloodType());
-        backgroundText.setText(this.patient.getBackground());       
+        backgroundText.setText(this.patient.getBackground());
     }
-    
-    
-    
-     @FXML
+
+    @FXML
     private void changeToQuestionnaire(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/questionnairescreen.fxml"));
         root = loader.load();
@@ -76,7 +76,7 @@ public class PatientInfoController {
         stage.setResizable(true);
         stage.show();
     }
-    
+
     @FXML
     private void returnToMainScreen(ActionEvent e) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
@@ -88,30 +88,29 @@ public class PatientInfoController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-    
+
     @FXML
     private void changeToprevious(ActionEvent e) throws IOException, SQLException {
-        JDBCManager manager= new JDBCManager();
+        JDBCManager manager = new JDBCManager();
         JDBCDiseaseManager diseasemanager = new JDBCDiseaseManager(manager);
-        Disease disease = diseasemanager.searchDiseaseById(patient.getPatientId());        
-        if (disease.getDiseaseId() != 0){
-        patient.setDisease(disease);  
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
-        root = loader.load();
-        ResultsTestController resultstestcontroller = loader.getController();
-        resultstestcontroller.setDoctor(doctor);
-        resultstestcontroller.setPatient(patient);
-        resultstestcontroller.setResults();
-        stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setResizable(true);
-        stage.show();
-        }
-        else{
-            //ERROR POP UP
+        Disease disease = diseasemanager.searchDiseaseById(patient.getPatientId());
+        if (disease != null) {
+            patient.setDisease(disease);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
+            root = loader.load();
+            ResultsTestController resultstestcontroller = loader.getController();
+            resultstestcontroller.setDoctor(doctor);
+            resultstestcontroller.setPatient(patient);
+            resultstestcontroller.setResults();
+            stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setResizable(true);
+            stage.show();
+        } else {
+            ep.errorPopup(15);
+            return;
         }
     }
 }

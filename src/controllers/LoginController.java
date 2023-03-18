@@ -32,7 +32,7 @@ public class LoginController {
     private Parent root;
     private Stage stage;
     private Scene scene;
-    
+
     private ErrorPopUpController ep = new ErrorPopUpController();
 
     @FXML
@@ -51,26 +51,33 @@ public class LoginController {
 
     @FXML
     private void checkLogin(ActionEvent e) throws IOException, SQLException {
-        
+
         String email = emailText.getText();
         String password = passwordText.getText();
+        String checkEmail = jdbcdoctorManager.checkEmail(email);
+
+        if (checkEmail.equals("")) {
+            ep.errorPopup(2); // email not registered
+            return;
+        }
+
         Doctor doctor = jdbcdoctorManager.checkUser(email, password);
 
-        if (doctor == null){
-            ep.errorPopup(2);
+        if (doctor == null) {
+            ep.errorPopup(17); // incorrect password
+            return;
         }
-         
+
         //CHANGE TO MAIN SCREEN
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
         root = loader.load();
         MainScreenController maincontroller = loader.getController();
-        maincontroller.setDoctor(doctor);     
+        maincontroller.setDoctor(doctor);
         stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
 
     @FXML
@@ -83,6 +90,5 @@ public class LoginController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
 }

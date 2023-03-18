@@ -5,6 +5,7 @@
 package controllers;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +37,7 @@ public class MainScreenController {
 
     @FXML
     Label welcomeText;
-    
+
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
         this.welcomeText.setText("Welcome Mr/Mrs " + doctor.getName() + " " + doctor.getSurname());
@@ -54,7 +55,6 @@ public class MainScreenController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
 
     @FXML
@@ -69,11 +69,10 @@ public class MainScreenController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
 
     @FXML
-    private void ChangeToListPatients(ActionEvent e) throws IOException {
+    private void ChangeToListPatients(ActionEvent e) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/listpatientscreen.fxml"));
         root = loader.load();
         ListofPatientsController listofpatients = loader.getController();
@@ -96,7 +95,5 @@ public class MainScreenController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-
 }

@@ -34,21 +34,23 @@ import pojos.Patient;
  * @author mariadefarges
  */
 public class QuestionnaireController {
-    
+
     private Parent root;
     private Stage stage;
     private Scene scene;
     Doctor doctor;
     Patient patient;
 
+    private ErrorPopUpController ep = new ErrorPopUpController();
+
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
-    
+
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
- 
+
     @FXML
     RadioButton yesChestpain, noChestpain;
 
@@ -164,7 +166,6 @@ public class QuestionnaireController {
         this.hbpGroup = new ToggleGroup();
         this.yesHbp.setToggleGroup(this.hbpGroup);
         this.noHbp.setToggleGroup(this.hbpGroup);
-
     }
 
     @FXML
@@ -186,125 +187,194 @@ public class QuestionnaireController {
         boolean irregularHeartBeat = false;
         boolean swellingLegs = false;
         boolean chestPain = false;
+        boolean completeQuestionnaire = true;
 
-        //CHEST PAIN
-        if (chestpainGroup.getSelectedToggle() == yesChestpain) {
-            chestPain = true;
-        }
-        if (chestpainGroup.getSelectedToggle() == noChestpain) {
-            chestPain = false;
-        }
-        //SWEATING
-        if (sweatingGroup.getSelectedToggle() == yesSweating) {
-            sweating = true;
-        }
-        if (sweatingGroup.getSelectedToggle() == noSweating) {
-            sweating = false;
-        }
-        //NAUSEA
-        if (nauseaGroup.getSelectedToggle() == yesNausea) {
-            nausea = true;
-        }
-        if (nauseaGroup.getSelectedToggle() == noNausea) {
-            nausea = false;
-        }
-        //LEGS PAIN
-        if (legpainGroup.getSelectedToggle() == yesLegpain) {
-            legsPain = true;
-        }
-        if (sweatingGroup.getSelectedToggle() == noLegpain) {
-            legsPain = false;
-        }
-        //SKIN CHANGES
-        if (skincGroup.getSelectedToggle() == yesSkinc) {
-            skinChanges = true;
-        }
-        if (skincGroup.getSelectedToggle() == noSkinc) {
-            skinChanges = false;
-        }
-        //PULSE
-        if (pulseGroup.getSelectedToggle() == decreasedPulse) {
-            decreasedpulse = true;
-        }
-        if (pulseGroup.getSelectedToggle() == increasedPulse) {
-            increasedpulse = true;
-        }
-        if (pulseGroup.getSelectedToggle() == irregularPulse) {
-            irregularHeartBeat = true;
-        }
-        if (pulseGroup.getSelectedToggle() == normalPulse) {
-            decreasedpulse = false;
-            increasedpulse = false;
-            irregularHeartBeat = false;
-        }
-        //SWELLING
-        if (swellingGroup.getSelectedToggle() == yesSwelling) {
-            swellingLegs = true;
-        }
-        if (skincGroup.getSelectedToggle() == noSwelling) {
-            swellingLegs = false;
-        }
-        //WEAKNESS
-        if (weaknessGroup.getSelectedToggle() == yesWeakness) {
-            weakness = true;
-        }
-        if (weaknessGroup.getSelectedToggle() == noWeakness) {
-            weakness = false;
-        }
-        //SHORTNESS OF BREATH
-        if (sobGroup.getSelectedToggle() == yesSob) {
-            shortnessOfBreath = true;
-        }
-        if (sobGroup.getSelectedToggle() == noSob) {
-            shortnessOfBreath = false;
-        }
-        //FATIGUE
-        if (fatigueGroup.getSelectedToggle() == yesFatigue) {
-            fatigue = true;
-        }
-        if (fatigueGroup.getSelectedToggle() == noFatigue) {
-            fatigue = false;
-        }
-        //HEADACHE
-        if (headacheGroup.getSelectedToggle() == yesHeadache) {
-            headache = true;
-        }
-        if (headacheGroup.getSelectedToggle() == noHeadache) {
-            headache = false;
-        }
-        //DIZZINESS
-        if (dizzinessGroup.getSelectedToggle() == yesDizziness) {
-            dizziness = true;
-        }
-        if (dizzinessGroup.getSelectedToggle() == noDizziness) {
-            dizziness = false;
-        }
-        //UPPER BODY PAIN
-        if (ubpGroup.getSelectedToggle() == yesUbp) {
-            upperBodyPain = true;
-        }
-        if (ubpGroup.getSelectedToggle() == noUbp) {
-            upperBodyPain = false;
-        }
-        //TEMPERATURE CHANGES
-        if (tcGroup.getSelectedToggle() == yesTc) {
-            temperatureChanges = true;
-        }
-        if (tcGroup.getSelectedToggle() == noTc) {
-            temperatureChanges = false;
-        }
-        //HIGH BLOOD PRESSURE
-        if (hbpGroup.getSelectedToggle() == yesHbp) {
-            highBloodPressure = true;
-        }
-        if (hbpGroup.getSelectedToggle() == noHbp) {
-            highBloodPressure = false;
-        }
+        do {
+
+            //CHEST PAIN
+            if (chestpainGroup.getSelectedToggle() == yesChestpain) {
+                chestPain = true;
+                completeQuestionnaire = true;
+            } else if (chestpainGroup.getSelectedToggle() == noChestpain) {
+                chestPain = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //SWEATING
+            if (sweatingGroup.getSelectedToggle() == yesSweating) {
+                sweating = true;
+                completeQuestionnaire = true;
+            } else if (sweatingGroup.getSelectedToggle() == noSweating) {
+                sweating = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //NAUSEA
+            if (nauseaGroup.getSelectedToggle() == yesNausea) {
+                nausea = true;
+                completeQuestionnaire = true;
+            } else if (nauseaGroup.getSelectedToggle() == noNausea) {
+                nausea = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //LEGS PAIN
+            if (legpainGroup.getSelectedToggle() == yesLegpain) {
+                legsPain = true;
+                completeQuestionnaire = true;
+            } else if (sweatingGroup.getSelectedToggle() == noLegpain) {
+                legsPain = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //SKIN CHANGES
+            if (skincGroup.getSelectedToggle() == yesSkinc) {
+                skinChanges = true;
+                completeQuestionnaire = true;
+            } else if (skincGroup.getSelectedToggle() == noSkinc) {
+                skinChanges = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //PULSE
+            if (pulseGroup.getSelectedToggle() == decreasedPulse) {
+                decreasedpulse = true;
+                completeQuestionnaire = true;
+            } else if (pulseGroup.getSelectedToggle() == increasedPulse) {
+                increasedpulse = true;
+                completeQuestionnaire = true;
+            } else if (pulseGroup.getSelectedToggle() == irregularPulse) {
+                irregularHeartBeat = true;
+                completeQuestionnaire = true;
+            } else if (pulseGroup.getSelectedToggle() == normalPulse) {
+                decreasedpulse = false;
+                increasedpulse = false;
+                irregularHeartBeat = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //SWELLING
+            if (swellingGroup.getSelectedToggle() == yesSwelling) {
+                swellingLegs = true;
+                completeQuestionnaire = true;
+            } else if (skincGroup.getSelectedToggle() == noSwelling) {
+                swellingLegs = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //WEAKNESS
+            if (weaknessGroup.getSelectedToggle() == yesWeakness) {
+                weakness = true;
+                completeQuestionnaire = true;
+            } else if (weaknessGroup.getSelectedToggle() == noWeakness) {
+                weakness = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //SHORTNESS OF BREATH
+            if (sobGroup.getSelectedToggle() == yesSob) {
+                shortnessOfBreath = true;
+                completeQuestionnaire = true;
+            } else if (sobGroup.getSelectedToggle() == noSob) {
+                shortnessOfBreath = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //FATIGUE
+            if (fatigueGroup.getSelectedToggle() == yesFatigue) {
+                fatigue = true;
+                completeQuestionnaire = true;
+            } else if (fatigueGroup.getSelectedToggle() == noFatigue) {
+                fatigue = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //HEADACHE
+            if (headacheGroup.getSelectedToggle() == yesHeadache) {
+                headache = true;
+                completeQuestionnaire = true;
+            } else if (headacheGroup.getSelectedToggle() == noHeadache) {
+                headache = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //DIZZINESS
+            if (dizzinessGroup.getSelectedToggle() == yesDizziness) {
+                dizziness = true;
+                completeQuestionnaire = true;
+            } else if (dizzinessGroup.getSelectedToggle() == noDizziness) {
+                dizziness = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //UPPER BODY PAIN
+            if (ubpGroup.getSelectedToggle() == yesUbp) {
+                upperBodyPain = true;
+                completeQuestionnaire = true;
+            } else if (ubpGroup.getSelectedToggle() == noUbp) {
+                upperBodyPain = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //TEMPERATURE CHANGES
+            if (tcGroup.getSelectedToggle() == yesTc) {
+                temperatureChanges = true;
+                completeQuestionnaire = true;
+            } else if (tcGroup.getSelectedToggle() == noTc) {
+                temperatureChanges = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            //HIGH BLOOD PRESSURE
+            if (hbpGroup.getSelectedToggle() == yesHbp) {
+                highBloodPressure = true;
+                completeQuestionnaire = true;
+            } else if (hbpGroup.getSelectedToggle() == noHbp) {
+                highBloodPressure = false;
+                completeQuestionnaire = true;
+            } else {
+                completeQuestionnaire = false;
+            }
+
+            if (completeQuestionnaire == false) {
+                ep.errorPopup(16);
+                return;
+            }
+
+        } while (completeQuestionnaire == false);
 
         Condition condition = new Condition(chestPain, sweating, nausea, legsPain, skinChanges, decreasedpulse,
                 swellingLegs, shortnessOfBreath, fatigue, increasedpulse, headache, dizziness, upperBodyPain,
                 temperatureChanges, highBloodPressure, irregularHeartBeat, weakness);
-        
+
         patient.setConditions(condition);
         patient.getDisease().setArrythmia(0);
         patient.getDisease().setHeartBurn(0);
@@ -313,12 +383,11 @@ public class QuestionnaireController {
         patient.getDisease().setMyocardialInfarction(0);
         patient.getDisease().setStroke(0);
         patient.getDisease().setpArterialDisease(0);
-        
+
         JDBCManager manager = new JDBCManager();
         JDBCConditionManager conditionmanager = new JDBCConditionManager(manager);
         conditionmanager.addCondition(condition, patient.getPatientId());
-        
-        
+
         KieServices ks = KieServices.Factory.get();
         KieContainer kc = ks.getKieClasspathContainer();
 
@@ -334,7 +403,6 @@ public class QuestionnaireController {
         System.out.println("Hypertension: " + patient.getDisease().getHypertension());
         ksession.dispose();
 
- 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/resultstestscreen.fxml"));
         root = loader.load();
         ResultsTestController resultstest = loader.getController();
@@ -346,7 +414,5 @@ public class QuestionnaireController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-
 }

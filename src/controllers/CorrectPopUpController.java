@@ -17,10 +17,10 @@ import javafx.stage.Stage;
  * @author carme
  */
 public class CorrectPopUpController {
-    
+
     @FXML
     private Label correctText;
-    
+
     private Parent rootCorrect;
     private Stage stageCorrect;
     private Scene sceneCorrect;
@@ -28,10 +28,7 @@ public class CorrectPopUpController {
     public CorrectPopUpController() {
     }
 
-   
-
     public void displayCorrectText(String text) {
-
         correctText.setText(text);
         correctText.setWrapText(true);
     }
@@ -67,11 +64,21 @@ public class CorrectPopUpController {
                 stageCorrect.setResizable(false);
                 stageCorrect.alwaysOnTopProperty();
                 stageCorrect.show();
-                
                 break;
-     
-
+            case 2:
+                loaderCorrect = new FXMLLoader(getClass().getResource("/fxmlfiles/correctPopUp.fxml"));
+                rootCorrect = loaderCorrect.load();
+                correctPopupController = loaderCorrect.getController();
+                correctPopupController.displayCorrectText("The password has been changed successfully");
+                sceneCorrect = new Scene(rootCorrect);
+                stageCorrect = new Stage();
+                stageCorrect.setScene(sceneCorrect);
+                stageCorrect.setTitle("Succesful password change");
+                stageCorrect.setAlwaysOnTop(true);
+                stageCorrect.setResizable(false);
+                stageCorrect.alwaysOnTopProperty();
+                stageCorrect.show();
+                break;
         }
     }
-    
 }

@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  */
 public class Disease {
     
-    private int diseaseId;
+    private int diseaseId ;
     private int myocardialInfarction;
     private int heartFailure ;
     private int pArterialDisease;

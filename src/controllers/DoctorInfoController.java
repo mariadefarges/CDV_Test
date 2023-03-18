@@ -24,7 +24,6 @@ import pojos.Doctor;
  */
 public class DoctorInfoController {
 
-
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -40,14 +39,13 @@ public class DoctorInfoController {
 
     @FXML
     Label nameText, surnameText, genderText, hospitalText, emailText;
-    
-        public void setInfo (){
+
+    public void setInfo() {
         nameText.setText(this.doctor.getName());
         surnameText.setText(this.doctor.getSurname());
         genderText.setText(this.doctor.getGender());
         hospitalText.setText(this.doctor.getHospital());
         emailText.setText(this.doctor.getEmail());
-           
     }
 
     @FXML
@@ -61,7 +59,6 @@ public class DoctorInfoController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
 
     @FXML
@@ -75,7 +72,5 @@ public class DoctorInfoController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-
 }

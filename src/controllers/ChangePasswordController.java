@@ -29,6 +29,9 @@ public class ChangePasswordController {
     private Parent root;
     private Stage stage;
     private Scene scene;
+    
+    private ErrorPopUpController ep = new ErrorPopUpController();
+    private CorrectPopUpController cp = new CorrectPopUpController();
 
     Doctor doctor;
 
@@ -50,13 +53,15 @@ public class ChangePasswordController {
         JDBCDoctorManager doctormanager = new JDBCDoctorManager(manager, patientmanager);
         int checkdoctorId = doctormanager.checkPassword(previousp);
         if (checkdoctorId != doctor.getDoctorId()) {
-            //ERROR POP UP
+            ep.errorPopup(14);
+            return;
         }
         if (!newp.equals(repeatp)) {
-            //ERROR POP UP
+            ep.errorPopup(3);
+            return;
         } else {
             doctormanager.changePassword(newp, doctor.getDoctorId());
-            //SUCCESS POP UP
+            cp.correctPopup(2);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
             root = loader.load();
             MainScreenController mainscreencontroller = loader.getController();
@@ -67,7 +72,6 @@ public class ChangePasswordController {
             stage.setResizable(true);
             stage.show();
         }
-
     }
 
     @FXML
@@ -81,7 +85,5 @@ public class ChangePasswordController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-
 }

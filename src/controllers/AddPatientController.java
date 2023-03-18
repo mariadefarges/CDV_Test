@@ -140,6 +140,10 @@ public class AddPatientController {
         //Date Picker
         LocalDate date = dob.getValue();
         Date birthdate = Date.valueOf(date);
+        if (birthdate.after(Date.valueOf(LocalDate.now()))) {
+            ep.errorPopup(18);
+            return;
+        }
 
         String weighttext = "";
         weighttext = weightText.getText();
@@ -147,7 +151,17 @@ public class AddPatientController {
             ep.errorPopup(12);
             return;
         }
+
         Float weight = Float.parseFloat(weighttext);
+        if (weight.isNaN()) {
+            ep.errorPopup(19);
+            return;
+        }
+
+        if (group == null || rh == null) {
+            ep.errorPopup(20);
+            return;
+        }
 
         String bloodtype = group + " " + rh;
 
@@ -162,7 +176,7 @@ public class AddPatientController {
         JDBCManager manager = new JDBCManager();
         JDBCPatientManager patientmanager = new JDBCPatientManager(manager);
         patientmanager.addPatient(patient, doctor.getDoctorId());
-        
+
         //SUCESS POP UP
         cp.correctPopup(1);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxmlfiles/mainscreen.fxml"));
@@ -187,7 +201,5 @@ public class AddPatientController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-
 }

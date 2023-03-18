@@ -37,14 +37,14 @@ public class ResultsTestController {
     private Parent root;
     private Stage stage;
     private Scene scene;
-    
+
     Doctor doctor;
     Patient patient;
 
     public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
-    
+
     public void setPatient(Patient patient) {
         this.patient = patient;
     }
@@ -67,7 +67,7 @@ public class ResultsTestController {
         resultH.setText("" + patient.getDisease().getHypertension() + "%");
         resultS.setText("" + patient.getDisease().getStroke() + "%");
         resultA.setText("" + patient.getDisease().getArrythmia() + "%");
-        
+
         JDBCManager manager = new JDBCManager();
         JDBCDiseaseManager diseasemanager = new JDBCDiseaseManager(manager);
         diseasemanager.addDisease(patient.getDisease(), patient.getPatientId());
@@ -158,7 +158,5 @@ public class ResultsTestController {
         stage.setScene(scene);
         stage.setResizable(true);
         stage.show();
-
     }
-
 }

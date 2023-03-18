@@ -24,10 +24,10 @@ import jdbc.JDBCPatientManager;
 public class FirstScreenController {
 
     public static JDBCManager manager = new JDBCManager();
-    public static  JDBCDiseaseManager diseaseManager = new JDBCDiseaseManager(manager);  
-    public static  JDBCPatientManager patientManager = new JDBCPatientManager(manager);
-    public static  JDBCDoctorManager doctorManager = new JDBCDoctorManager(manager, patientManager);
-    public static  JDBCConditionManager conditionManager = new JDBCConditionManager(manager);
+    public static JDBCDiseaseManager diseaseManager = new JDBCDiseaseManager(manager);
+    public static JDBCPatientManager patientManager = new JDBCPatientManager(manager);
+    public static JDBCDoctorManager doctorManager = new JDBCDoctorManager(manager, patientManager);
+    public static JDBCConditionManager conditionManager = new JDBCConditionManager(manager);
 
     private Parent root;
     private Stage stage;
@@ -54,7 +54,6 @@ public class FirstScreenController {
         stage.setResizable(false);
         stage.setTitle("Register");
         stage.show();
-
     }
 
     @FXML
@@ -71,7 +70,5 @@ public class FirstScreenController {
         stage.setResizable(true);
         stage.setTitle("Log In");
         stage.show();
-
     }
-
 }
