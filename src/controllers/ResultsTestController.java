@@ -71,7 +71,6 @@ public class ResultsTestController {
         JDBCManager manager = new JDBCManager();
         JDBCDiseaseManager diseasemanager = new JDBCDiseaseManager(manager);
         diseasemanager.addDisease(patient.getDisease(), patient.getPatientId());
-        System.out.println(patient.getDisease());
 
     }
 
